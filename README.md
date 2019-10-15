@@ -63,13 +63,57 @@ ________________________________________________________________________________
 
 *Folder Structure*
 
-#!/bin/bash
+Valente3/
+├── index.js
+├── README.md
+│     
+├── modules/
+│   └── user.js
+│   
+├──public/    
+│     ├── avatars/
+│     │   └──avatar.png
+│     ├──images/
+│     │   ├──bell.svg
+│     │   ├──logo.pn
+│     │   ├──facebook.svg
+│     │   ├──instagram.svg
+│     │   ├──linkedin.svg
+│     │   ├──search.svg
+│     │   ├──subject.svg
+│     │   └──twitter.svg
+│     ├──css/
+│     │   └──tylesheet.css
+│     └──style.css
+│ 
+├──unit tests/
+│     └──user.spec.js  
+│
+├──views/
+│     ├──error.handlebars
+│     ├──index.handlebars
+│     ├──login.handlebars
+│     ├──register.handlebars
+│     ├──nav.hatml
+│     ├──about.html
+│     ├──download.html
+│     ├──footer.html
+│     └──homepage.html
+│
+├──authors/
+│     ├──sofia.png
+│     ├──views/josh.png
+│
+└──layout/
+      ├──abput page.png
+      ├──contacts page.png
+      ├──homepage.png
+      ├──log-in pop-up.png
+      ├──my downloads.png
+      ├──username.png
+      └──website layout.xd
 
-#File: tree-md
-
-tree=$(tree -tf --noreport -I '*~' --charset ascii $1 |
-       sed -e 's/| \+/  /g' -e 's/[|`]-\+/ */g' -e 's:\(* \)\(\(.*/\)\([^/]\+\)\):\1[\4](\2):g')
-
-printf "# Project tree\n\n${tree}"
 
 
+
+ 
