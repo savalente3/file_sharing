@@ -63,55 +63,55 @@ ________________________________________________________________________________
 
 *Folder Structure*
 
-Valente3/
-├── index.js
-├── README.md
-│     
-├── modules/
-│   └── user.js
-│   
-├──public/    
-│     ├── avatars/
-│     │   └──avatar.png
-│     ├──images/
-│     │   ├──bell.svg
-│     │   ├──logo.pn
-│     │   ├──facebook.svg
-│     │   ├──instagram.svg
-│     │   ├──linkedin.svg
-│     │   ├──search.svg
-│     │   ├──subject.svg
-│     │   └──twitter.svg
-│     ├──css/
-│     │   └──tylesheet.css
-│     └──style.css
-│ 
-├──unit tests/
-│     └──user.spec.js  
-│
-├──views/
-│     ├──error.handlebars
-│     ├──index.handlebars
-│     ├──login.handlebars
-│     ├──register.handlebars
-│     ├──nav.hatml
-│     ├──about.html
-│     ├──download.html
-│     ├──footer.html
-│     └──homepage.html
-│
-├──authors/
-│     ├──sofia.png
-│     ├──views/josh.png
-│
-└──layout/
-      ├──abput page.png
-      ├──contacts page.png
-      ├──homepage.png
-      ├──log-in pop-up.png
-      ├──my downloads.png
-      ├──username.png
-      └──website layout.xd
+Valente3/<br />
+├── index.js<br />
+├── README.md<br />
+│     <br />
+├── modules/<br />
+│   └── user.js<br />
+│   <br />
+├──public/ <br />   
+│     ├── avatars/<br />
+│     │   └──avatar.png<br />
+│     ├──images/<br />
+│     │   ├──bell.svg<br />
+│     │   ├──logo.pn<br />
+│     │   ├──facebook.svg<br />
+│     │   ├──instagram.svg<br />
+│     │   ├──linkedin.svg<br />
+│     │   ├──search.svg<br />
+│     │   ├──subject.svg<br />
+│     │   └──twitter.svg<br />
+│     ├──css/<br />
+│     │   └──tylesheet.css<br />
+│     └──style.css<br />
+│ <br />
+├──unit tests/<br />
+│     └──user.spec.js <br /> 
+│<br />
+├──views/<br />
+│     ├──error.handlebars<br />
+│     ├──index.handlebars<br />
+│     ├──login.handlebars<br />
+│     ├──register.handlebars<br />
+│     ├──nav.hatml<br />
+│     ├──about.html<br />
+│     ├──download.html<br />
+│     ├──footer.html<br />
+│     └──homepage.html<br />
+│<br />
+├──authors/<br />
+│     ├──sofia.png<br />
+│     ├──views/josh.png<br />
+│<br />
+└──layout/<br />
+      ├──about page.png<br />
+      ├──contacts page.png<br />
+      ├──homepage.png<br />
+      ├──log-in pop-up.png<br />
+      ├──my downloads.png<br />
+      ├──username.png<br />
+      └──website layout.xd<br />
 
 
 
