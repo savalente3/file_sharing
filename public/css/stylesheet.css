@@ -1,0 +1,40 @@
+
+
+#dtmember1{
+	color: black;
+}
+
+#ddmember1{
+	color: blue;
+}
+
+
+
+#AboutTeam{
+	float: left;
+  	width: 60%;
+  	text-align: left;
+  	padding-left: 5%;
+  	
+}
+
+
+#AboutProject{
+	float: right;
+  	width: 30%;
+  	text-align: center;
+
+
+}
+
+
+
+
+#Footer{
+	float: right;
+	text-align: center;	
+	padding-top: 20%;
+	padding-right: 13%;
+
+}
+

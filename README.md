@@ -1,24 +1,68 @@
+﻿**_# fileSharing_**
 
-# Assignment Template
-This repository contains the base files for the assignment. You will need to create a _private duplicate_ in your module organisation. Carry out the following steps, taken from the [GitHub documentation](https://help.github.com/en/enterprise/2.16/user/articles/duplicating-a-repository):
+_software engineering project: File sharing_
 
-Temporarily clone this repository to your development computer. This will create a directory on your computer called `temp` which contains the repository files:
+When uploading a file to share between users, the sender can choose between drag and drop or search the file. Once sent, the receiver gets and email with a link to download the file. To download, the receiver must be logged in to get access to the list of files available to download. Each file is only available for 3 days or until it is downloaded. The receiver can also preview the files and get information such as format, size, date and time of upload and remaining time until deletion.
 
-`git clone https://github.coventry.ac.uk/web/template-dynamic-websites.git temp`
+Team Members 
 
-Create a new **private** repository in the module organisation on the GitHub server and copy the _clone url_ to the clipboard (the one that begins with `https://` and ends in `.git`. The repository name should be your username (the one you use to log into the University computers).
 
-Mirror Push to this new repository, replacing xxx with the url from the clipboard making sure you are _in_ the `temp/` directory:
+**Dependencies**
+ -  Koa
+ - nodeJS
 
-`cd temp/ && git push --mirror xxx`
 
-Once you are sure the code is in your new repository, delete the temporary local repository.
+***: Basic features**
+**Logged-in users upload files to the server.**
+**Email a link to download the file.**
+**The files are not stored in the public directory.**
+**The download link with a # string, not the file name.**
 
-`cd .. && rm -rf temp/`
-Your private repository on GitHub will now contain a complete copy of this template including the commits that were already made. You can now start your assignment by carrying out the following steps:
+****: intermediate features**
+**Files are deleted after downloaded or after 3 days.**
+**All files should download.**
 
-Clone your private repository
+*****: advanced features**
+**Choose the username of who can access it.**
+**This username must already exist.**
+**Logged in user have a list of the files they can download.**
+**All files in the list should have: type of file, size, date and time of upload and time until deletion.**
 
-Change your [local config settings](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup). This is a vital step otherwise your commits won't show on the GitHub _graph_ and your grade will be affected.
+**Team members**
 
-Start working on the assignment. Remember to install all the dependencies listed in the `package.json` file.
+
+| [Alfonzo](https://github.coventry.ac.uk/alfonzoj/)                           | [Eduardo](https://github.coventry.ac.uk/cruzfrae)                                        | [Guilherme](https://github.coventry.ac.uk/deoliveg)         | [Hassan](https://github.coventry.ac.uk/sultanh5)       | [Josh](https://github.coventry.ac.uk/handley7)         | [Preeth](https://github.coventry.ac.uk/selvamop)          | [Sofia](https://github.coventry.ac.uk/valente3)          |               
+| :---:                                           |     :---:                                    |     :---:      |         :---: |         :---: |    :---:      |:---:      |
+|                                                 |                                              |                |               |               |               |                |
+| <img src="authors/alfonzo.jpg" width="100">| <img src="authors/eduardo.jpg" width="100"> |<img src="authors/gui.jpg" width="100">                | <img src="authors/hassan.jpg" width="100">   | <img src="authors/josh.jpg" width="100"> | <img src="authors/preeth.jpg" width="100">             | <img src="authors/sofia.jpg" width="100">
+
+______________________________________________________________________________________________________________________________
+
+*Installation*
+
+The install the packages: 
+- `npm install`
+
+______________________________________________________________________________________________________________________________
+
+*Git*
+
+Tutorial on how to work with git branches: 
+- https://rogerdudler.github.io/git-guide/
+	
+______________________________________________________________________________________________________________________________
+
+*Running*
+
+______________________________________________________________________________________________________________________________
+
+*Debugging*
+
+Debugging can be made with VS Code by pressing `f5` or with `nmp run watch`
+______________________________________________________________________________________________________________________________
+
+*Folder Structure*
+
+
+
+
