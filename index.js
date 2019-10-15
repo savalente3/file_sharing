@@ -28,8 +28,8 @@ app.use(session(app))
 app.use(views(`${__dirname}/views`, { extension: 'handlebars' }, {map: { handlebars: 'handlebars' }}))
 
 const defaultPort = 8080
-const port = process.env.PORT || defaultPort 
-const dbName = 'website.db'	
+const port = process.env.PORT || defaultPort
+const dbName = 'website.db'
 
 
 /**
