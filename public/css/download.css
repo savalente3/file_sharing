@@ -2,16 +2,18 @@
     height: 100%;
 } 
 
+.container{
+    display: grid;
+    grid-template-columns: 40% auto;
+}
+
 .webFonts{
     font-family: Arial, Helvetica, sans-serif;
 }
 
 article.previewBox{
-    float: left;
     background-color: lightgrey;
     text-align: center;
-    width: 49%;
-    height: 70%;
     margin-top: 10%;
     padding-top: 3%;
     border-radius: 25px;
@@ -19,12 +21,9 @@ article.previewBox{
 
 aside.fileBox{
     text-align: center;
-    float: right;
     background-color: gray;
-    width: 49%;
-    height: 100%;
     margin-top: 8%;
-    padding-top: 1.5%;
+    padding-top: 3%;
     border-radius: 25px;
 }
 
@@ -38,22 +37,12 @@ object.previewBox{
 iframe.fileList{
     grid-auto-rows: 3px;
     background-color: aquamarine;
-    height: 300px;
-    width: 67.3%;
-}
-
-.fileInfo{
-    height: 107px;
-    width: 72.6%;
-    background-color: aquamarine;
-}
-
-#fileInfoText{
-    padding-top: 4%;
+    height: 250px;
+    width: 75%;
 }
 
 #downloadButton{
-    padding-top: 3%;
+    margin-top: 5%;
 }
 
 button{
@@ -66,49 +55,6 @@ button{
 button:hover{
     background-color: rgba(121, 241, 250, 0.452); 
     color: white;
-    box-shadow: 0 0 16px 1px aquamarine;
-}
-
-.navBar{
-    padding: 1%;
-    margin-top: 0%;
-    width: 99.5%;
-    background-color: rgba(121, 241, 250, 0.452);
-    position: fixed;
-    top: 0;
-}
-
-.navBarList{
-    display: inline;
-}
-
-.logo{
-    color: black;
-    margin-left: 0%;
-    margin-right: 20px;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    padding: 0%;
-}
-
-.notifications{
-    color: black;
-    float: right;
-    margin-left: 20px;
-    margin-right: 70px;
-}
-
-.signIn{
-    color: black;
-    float: right;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.aboutUs{
-    color: black;
-    float: right;
-    margin-left: 20px;
-    margin-right: 20px;
+    box-shadow: 0 0 0 1px aquamarine;
 }
 
