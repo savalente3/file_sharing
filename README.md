@@ -84,7 +84,7 @@ Valente3/
 │     │   ├──subject.svg
 │     │   └──twitter.svg
 │     ├──css/
-│     │   └──tylesheet.css
+│     │   └──stylesheet.css
 │     └──style.css
 │ 
 ├──unit tests/
@@ -103,7 +103,7 @@ Valente3/
 │
 ├──authors/
 │     ├──sofia.png
-│     ├──views/josh.png
+│     ├──josh.png
 │
 └──layout/
       ├──abput page.png
