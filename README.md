@@ -103,7 +103,7 @@ Valente3/
 │
 ├──authors/
 │     ├──sofia.png
-│     ├──views/josh.png
+│     ├──josh.png
 │
 └──layout/
       ├──abput page.png
