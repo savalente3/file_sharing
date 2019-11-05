@@ -37,18 +37,8 @@ const dbName = 'website.db'
  *
  * @name Home Page
  * @route {GET} /
- * @authentication This route requires cookie-based authentication.
  */
-router.get('/', async ctx => {
-	try {
-		if(ctx.session.authorised !== true) return ctx.redirect('/login?msg=you need to log in')
-		const data = {}
-		if(ctx.query.msg) data.msg = ctx.query.msg
-		await ctx.render('index')
-	} catch(err) {
-		await ctx.render('error', {message: err.message})
-	}
-})
+router.get('/', async ctx => await ctx.render('homepage'))
 
 /**
  * The user registration page.
@@ -57,6 +47,24 @@ router.get('/', async ctx => {
  * @route {GET} /register
  */
 router.get('/register', async ctx => await ctx.render('register'))
+
+/**
+ * The user download page.
+ *
+ * @name Register Page
+ * @route {GET} /register
+ */
+router.get('/download', async ctx => await ctx.render('download'))
+
+/**
+ * The user registration page.
+ *
+ * @name Register Page
+ * @route {GET} /register
+ */
+router.get('/about', async ctx => await ctx.render('about'))
+
+
 
 /**
  * The script to process new user registrations.
