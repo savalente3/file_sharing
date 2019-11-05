@@ -33,7 +33,7 @@ const dbName = 'website.db'
 
 
 /**
- * The secure home page.
+ * The website's home page.
  *
  * @name Home Page
  * @route {GET} /
@@ -51,16 +51,16 @@ router.get('/register', async ctx => await ctx.render('register'))
 /**
  * The user download page.
  *
- * @name Register Page
- * @route {GET} /register
+ * @name Download Page
+ * @route {GET} /download
  */
 router.get('/download', async ctx => await ctx.render('download'))
 
 /**
- * The user registration page.
+ * The website about page.
  *
- * @name Register Page
- * @route {GET} /register
+ * @name About Page
+ * @route {GET} /about
  */
 router.get('/about', async ctx => await ctx.render('about'))
 
