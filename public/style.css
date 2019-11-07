@@ -112,10 +112,29 @@ button:hover{
 * Footer css code
 *
 */
-#Footer{
-	float: right;
-	text-align: center;	
-	padding-top: 20%;
-	padding-right: 13%;
 
+
+
+/*
+*
+* nav css code
+*
+*/
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  
+}
+
+ li > a{
+  display:block;
+  text-decoration: none;
+}
+
+nav{
+  background-color: aqua;
 }

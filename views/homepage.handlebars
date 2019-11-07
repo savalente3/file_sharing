@@ -8,31 +8,34 @@
 	<meta name="keywords" content="file, sharing, free, software,engineering">
 	<meta name="author" content="Green Night Dwellers">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../style.css">
+
 </head>
 
 <body>
-	<nav>
-		{{>navbar}}
-	</nav>
-	
+	<!-- nav bar imported from nav.handlebars using partials-->
+	{{>navbar}}
+
 	<section>
-	<h2>Drag and Drop your File Here</h2>
-	<tr><strong>or</strong></tr><br>
-	<form action="">
-		<input type="file" name="myFile" value="Browse your Computer"> <br>
-		<section>
-		<h2>To: </h2><input type="text" name="user" value="email@email.com">
-		<br>
-		<input type="submit" value="Send File">
-		</section>
+		<h2>Drag and Drop your File Here</h2>
+		<tr><strong>or</strong></tr><br>
+		<form action="">
+			<input type="file" name="myFile" value="Browse your Computer"> <br>
+			<section>
+				<h2>To: </h2><input type="text" name="user" value="email@email.com">
+				<br>
+				<input type="submit" value="Send File">
+			</section>
 		</form>
 	</section>
-	
+
 	<aside>
-	<iframe width="560" height="315" src="https://www.youtube.com/embed/C0DPdy98e4c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/C0DPdy98e4c" frameborder="0"
+			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</aside>
 	<footer>
 		{{>foot}}
 	</footer>
 </body>
+
 </html>
