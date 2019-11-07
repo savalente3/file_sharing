@@ -12,6 +12,7 @@ const staticDir = require('koa-static')
 const bodyParser = require('koa-bodyparser')
 const koaBody = require('koa-body')({multipart: true, uploadDir: '.'})
 const session = require('koa-session')
+const hbs = require('handlebars')
 //const jimp = require('jimp')
 
 /* IMPORT CUSTOM MODULES */
@@ -25,8 +26,20 @@ app.keys = ['darkSecret']
 app.use(staticDir('public'))
 app.use(bodyParser())
 app.use(session(app))
-app.use(views(`${__dirname}/views`, { extension: 'handlebars' }, {map: { handlebars: 'handlebars' }}))
+app.use(views(`${__dirname}/views`, 
+{ 
+	extension: 'handlebars',
+	options: {
+		partials: {
+			navbar: `${__dirname}/views/partials/nav.handlebars`,
+			foot: `${__dirname}/views/partials/footer.handlebars`
+		}
+	},
+	map: { handlebars: 'handlebars' }
+}))
 
+
+  
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
 const dbName = 'website.db'
@@ -92,6 +105,8 @@ router.get('/login', async ctx => {
 	const data = {}
 	if(ctx.query.msg) data.msg = ctx.query.msg
 	if(ctx.query.user) data.user = ctx.query.user
+	
+	console.log(data)
 	await ctx.render('login', data)
 })
 

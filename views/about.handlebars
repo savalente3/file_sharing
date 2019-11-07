@@ -8,21 +8,13 @@
 	<meta name="keywords" content="file, sharing, free, software,engineering">
 	<meta name="author" content="Green Night Dwellers">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 
 <body>
-	<section>
-		<nav>
-			<ul>
-				<li><img src="/images/ceb820d4-4e68-4ac7-8d50-9d2a2bfb9141_200x200.png" alt="logo" height="60" width="60"> </li>
-				<li><img src="/images/bell.svg" alt="notification icon" height="22" width="22"> </li>
-				<li> <a href="#"></a> Sign in/ Sign up </li>
-				<li> <a href="/">Home</a></li>
-				<li> <a href="/about">About Us</a></li>
-			</ul>
-		</nav>
-	</section>
+	<nav>
+		{{>navbar}}
+	</nav>
 		<section id = "AboutTeam">
 			<h2>About The Team!</h2>
 			<article id = "member1">
@@ -64,17 +56,7 @@
 		</aside>
 	
 	<footer id ="Footer">
-		<ul>
-			<li> <img src="/images/subject.svg" alt="language icon" height="22" width="22"> </li>
-			<li>English</li>
-			<li>&copy; File Sharing 2019</li>
-			<li> Terms &amp; Conditions </li>
-			<li> <a href="#">Contact Us</a> </li>
-			<li> <a href="#"> <img src="/images/linkedin.svg" alt="linkedin logo" height="22" width="22"></a></li>
-			<li> <a href="#"> <img src="/images/twitter.svg" alt="twitter logo" height="22" width="22"></a></li>
-			<li> <a href="#"> <img src="/images/instagram.svg" alt="instagram logo" height="22" width="22"></a></li>
-			<li> <a href="#"><img src="/images/facebook.svg" alt="facebook logo" height="22" width="22"></a></li>
-		</ul>
+		{{>foot}}
 	</footer>
 </body>
 </html>
