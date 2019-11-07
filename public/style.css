@@ -1,193 +1,190 @@
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .msg {
-    border: 1px solid red;
-    font-weight: bold;
-    color: red;
-    padding: 1em;
-  }
-
-
-/*
+ .msg {
+   border: 1px solid red;
+   font-weight: bold;
+   color: red;
+   padding: 1em;
+ }
+ /*
 * 
 *  Download page css code
 * 
 */
-html, body{
-  height: 100%;
-} 
+ html,
+ body {
+   height: 100%;
+ }
 
-.container{
-  display: grid;
-  grid-template-columns: 40% auto;
-  font-family: Arial, Helvetica, sans-serif;
-}
+ .container {
+   display: grid;
+   grid-template-columns: 40% auto;
+   font-family: Arial, Helvetica, sans-serif;
+ }
 
-article.previewBox{
-  background-color: lightgrey;
-  text-align: center;
-  margin-top: 10%;
-  padding-top: 3%;
-  border-radius: 25px;
-}
+ article.previewBox {
+   background-color: lightgrey;
+   text-align: center;
+   margin-top: 10%;
+   padding-top: 3%;
+   border-radius: 25px;
+ }
 
-aside.fileBox{
-  text-align: center;
-  background-color: gray;
-  margin-top: 8%;
-  padding-top: 3%;
-  border-radius: 25px;
-}
-
-
-object.previewBox{
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-iframe.fileList{
-  grid-auto-rows: 3px;
-  background-color: aquamarine;
-  height: 250px;
-  width: 75%;
-}
-
-#downloadButton{
-  margin-top: 5%;
-}
-
-button{
-  transition-duration: 0.3s;
-  border-radius: 5px;
-  font-size: 30px;
-  font-style: normal;
-}
-
-button:hover{
-  background-color: rgba(121, 241, 250, 0.452); 
-  color: white;
-  box-shadow: 0 0 0 1px aquamarine;
-}
+ aside.fileBox {
+   text-align: center;
+   background-color: gray;
+   margin-top: 8%;
+   padding-top: 3%;
+   border-radius: 25px;
+ }
 
 
-/*
+ object.previewBox {
+   width: 75%;
+   margin-left: auto;
+   margin-right: auto;
+ }
+
+ iframe.fileList {
+   grid-auto-rows: 3px;
+   background-color: aquamarine;
+   height: 250px;
+   width: 75%;
+ }
+
+ #downloadButton {
+   margin-top: 5%;
+ }
+
+ button {
+   transition-duration: 0.3s;
+   border-radius: 5px;
+   font-size: 30px;
+   font-style: normal;
+ }
+
+ button:hover {
+   background-color: rgba(121, 241, 250, 0.452);
+   color: white;
+   box-shadow: 0 0 0 1px aquamarine;
+ }
+
+
+ /*
 *
 *  About page css code
 *
 */
-#dtmember1{
-	color: black;
-}
+ #dtmember1 {
+   color: black;
+ }
 
-#ddmember1{
-	color: blue;
-}
-
-
-
-#AboutTeam{
-	float: left;
-  	width: 60%;
-  	text-align: left;
-  	padding-left: 5%;
-	  
-}
+ #ddmember1 {
+   color: blue;
+ }
 
 
-#AboutProject{
-	float: right;
-  	width: 30%;
-  	text-align: center;
+
+ #AboutTeam {
+   float: left;
+   width: 60%;
+   text-align: left;
+   padding-left: 5%;
+
+ }
 
 
-}
-/*
+ #AboutProject {
+   float: right;
+   width: 30%;
+   text-align: center;
+
+
+ }
+
+ /*
 *
 * nav css code
 *
 */
-body,
-html {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+ body,
+ html {
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   margin: 0;
+   padding: 0;
+ }
 
-header {
-    background-color: #426A5A;
-    margin: 0;
-    padding: 0;
-}
+ header {
+   background-color: #426A5A;
+   margin: 0;
+   padding: 0;
+ }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 30px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    overflow: hidden;
-}
+ ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 30px;
+   padding-top: 30px;
+   padding-bottom: 20px;
+   overflow: hidden;
+ }
 
-li {
-    float: right;
-}
+ li {
+   float: right;
+ }
 
-nav>ul>li>a {
-    display: block;
-    color: white;
-    padding: 2px 25px 2px 25px;
-    text-decoration: none;
+ nav>ul>li>a {
+   display: block;
+   color: white;
+   padding: 2px 25px 2px 25px;
+   text-decoration: none;
 
-}
+ }
 
-li a:hover:not(.active) {
-    border: #7FB685;
-    opacity: 0.5;
-    border-radius: 25px;
-}
+ li a:hover:not(.active) {
+   border: #7FB685;
+   opacity: 0.5;
+   border-radius: 25px;
+ }
 
-.logo {
-    float: left;
-}
-/*
+ .logo {
+   float: left;
+ }
+
+ /*
 *
 * Footer css code
 *
 */
-footer {
-    background-color: #EFF1ED;
-}
+ footer {
+   background-color: #EFF1ED;
+ }
 
-article>ul>li, article>ul>li>a {
-    display: block;
-    color: darkgrey;
-    padding: 2px 30px 2px 30px;
-    text-decoration: none;
-    float: left;
-}
+ article>ul>li,
+ article>ul>li>a {
+   display: block;
+   color: darkgrey;
+   padding: 2px 30px 2px 30px;
+   text-decoration: none;
+   float: left;
+ }
 
-article>ul{
-    padding-right: 370px;
-}
+ article>ul {
+   padding-right: 370px;
+ }
 
-.float-right {
-    float: right !important;
-    padding: 2px 2.5px 2px 2.5px;
-}
+ .float-right {
+   float: right !important;
+   padding: 2px 2.5px 2px 2.5px;
+ }
 
-section>ul>li>a {
-    display: block;
-    color: darkgrey;
-    padding: 2px 30px 2px 30px;
-    text-decoration: none;
-    float: right;
-}
+ section>ul>li>a {
+   display: block;
+   color: darkgrey;
+   padding: 2px 30px 2px 30px;
+   text-decoration: none;
+   float: right;
+ }
 
-article{
-    display: inline-grid;
-    grid-template-columns: auto auto;
-}
+ article {
+   display: inline-grid;
+   grid-template-columns: auto auto;
+ }
