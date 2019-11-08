@@ -1,23 +1,27 @@
+ html,
+ body {
+   height: 100%;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   margin: 0;
+   padding: 0;
+ } 
+ 
  .msg {
    border: 1px solid red;
    font-weight: bold;
    color: red;
    padding: 1em;
  }
+
  /*
 * 
 *  Download page css code
 * 
 */
- html,
- body {
-   height: 100%;
- }
-
  .container {
    display: grid;
    grid-template-columns: 40% auto;
-   font-family: Arial, Helvetica, sans-serif;
+
  }
 
  article.previewBox {
@@ -81,8 +85,6 @@
    color: blue;
  }
 
-
-
  #AboutTeam {
    float: left;
    width: 60%;
@@ -105,36 +107,36 @@
 * nav css code
 *
 */
- body,
- html {
-   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-   margin: 0;
-   padding: 0;
- }
 
  header {
    background-color: #426A5A;
    margin: 0;
    padding: 0;
+   position: fixed;
+   top: 0;
+   width: 100%;
  }
 
- ul {
+ ul.navformating,
+ ul.footerformating {
    list-style-type: none;
    margin: 0;
-   padding: 30px;
-   padding-top: 30px;
-   padding-bottom: 20px;
+   padding-right: 30px;
+   padding-left: 0;
+   padding-top: 10px;
+   padding-bottom: 5px;
    overflow: hidden;
  }
 
- li {
+ li.floatRightNav {
    float: right;
+   padding-top: 20px;
  }
 
  nav>ul>li>a {
    display: block;
    color: white;
-   padding: 2px 25px 2px 25px;
+   padding: 2px 10px 2px 35px;
    text-decoration: none;
 
  }
@@ -142,7 +144,6 @@
  li a:hover:not(.active) {
    border: #7FB685;
    opacity: 0.5;
-   border-radius: 25px;
  }
 
  .logo {
@@ -156,6 +157,10 @@
 */
  footer {
    background-color: #EFF1ED;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
  }
 
  article>ul>li,
@@ -167,14 +172,16 @@
    float: left;
  }
 
- article>ul {
-   padding-right: 370px;
+ li.floatRightFooter {
+   float: right !important;
  }
 
- .float-right {
-   float: right !important;
-   padding: 2px 2.5px 2px 2.5px;
+ .iconFormating {
+   padding-left: 400px !important;
+   padding-right: 0 !important;
+
  }
+
 
  section>ul>li>a {
    display: block;
@@ -188,3 +195,38 @@
    display: inline-grid;
    grid-template-columns: auto auto;
  }
+
+--------------
+
+.dropbtn {
+  display: inline-block;
+  color: white;
+  padding: 25px;
+  text-decoration: none;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 52px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 20px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #313638;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
