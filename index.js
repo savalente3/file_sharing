@@ -10,9 +10,11 @@ const Router = require('koa-router')
 const views = require('koa-views')
 const staticDir = require('koa-static')
 const bodyParser = require('koa-bodyparser')
-const koaBody = require('koa-body')({multipart: true, uploadDir: '.'})
+const koaBody = require('koa-body')({
+	multipart: true,
+	uploadDir: '.'
+})
 const session = require('koa-session')
-const hbs = require('handlebars')
 //const jimp = require('jimp')
 
 /* IMPORT CUSTOM MODULES */
@@ -26,8 +28,7 @@ app.keys = ['darkSecret']
 app.use(staticDir('public'))
 app.use(bodyParser())
 app.use(session(app))
-app.use(views(`${__dirname}/views`, 
-{ 
+app.use(views(`${__dirname}/views`, {
 	extension: 'handlebars',
 	options: {
 		partials: {
@@ -35,15 +36,15 @@ app.use(views(`${__dirname}/views`,
 			foot: `${__dirname}/views/partials/footer.handlebars`
 		}
 	},
-	map: { handlebars: 'handlebars' }
+	map: {
+		handlebars: 'handlebars'
+	}
 }))
 
 
-  
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
 const dbName = 'website.db'
-
 
 /**
  * The website's home page.
@@ -77,8 +78,6 @@ router.get('/download', async ctx => await ctx.render('download'))
  */
 router.get('/about', async ctx => await ctx.render('about'))
 
-
-
 /**
  * The script to process new user registrations.
  *
@@ -96,16 +95,18 @@ router.post('/register', koaBody, async ctx => {
 		// await user.uploadPicture(path, type)
 		// redirect to the home page
 		ctx.redirect(`/?msg=new user "${body.name}" added`)
-	} catch(err) {
-		await ctx.render('error', {message: err.message})
+	} catch (err) {
+		await ctx.render('error', {
+			message: err.message
+		})
 	}
 })
 
 router.get('/login', async ctx => {
 	const data = {}
-	if(ctx.query.msg) data.msg = ctx.query.msg
-	if(ctx.query.user) data.user = ctx.query.user
-	
+	if (ctx.query.msg) data.msg = ctx.query.msg
+	if (ctx.query.user) data.user = ctx.query.user
+
 	console.log(data)
 	await ctx.render('login', data)
 })
@@ -117,8 +118,10 @@ router.post('/login', async ctx => {
 		await user.login(body.user, body.pass)
 		ctx.session.authorised = true
 		return ctx.redirect('/?msg=you are now logged in...')
-	} catch(err) {
-		await ctx.render('error', {message: err.message})
+	} catch (err) {
+		await ctx.render('error', {
+			message: err.message
+		})
 	}
 })
 
@@ -129,3 +132,4 @@ router.get('/logout', async ctx => {
 
 app.use(router.routes())
 module.exports = app.listen(port, async() => console.log(`listening on port ${port}`))
+
