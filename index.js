@@ -39,9 +39,6 @@ app.use(views(`${__dirname}/views`, {
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
 const dbName = 'website.db'
-
-
-
 /**
  * The website's home page.
  *
@@ -51,8 +48,6 @@ const dbName = 'website.db'
 router.get('/', async ctx => {
 	await ctx.render('homepage', {user: ctx.session.user})
 })
-
-
 /**
  * The user registration page.
  *
@@ -72,29 +67,6 @@ router.get('/register', async ctx => {
 		})
 	}
 })
-
-router.post('/register', koaBody, async ctx => {
-	try {
-		const body = ctx.request.body
-
-		let user = await new User(dbName);
-		user.register(body.user, body.email, body.pass)
-		user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.user)
-		//logs user in after regestry
-		user.login(body.user, body.pass)
-		ctx.session.authorised = true
-		//saving user name in session auth
-		ctx.session.user = body.user
-		// redirect to the home page
-		ctx.redirect(`/?msg=new user "${body.user}" added`)
-	} catch (err) {
-		await ctx.render('error', {
-			message: err.message
-		})
-	}
-})
-
-
 /**
  * The user download page.
  *
@@ -119,6 +91,33 @@ router.get('/about', async ctx => await ctx.render('about'))
  * @name Login Script
  * @route {GET} /login
  */
+router.post('/register', koaBody, async ctx => {
+	try {
+		const body = ctx.request.body
+<<<<<<< HEAD
+		console.log(body)
+		// call the functions in the module
+		const user = await new User(dbName)
+		await user.register(body.user, body.email, body.pass)
+		// await user.uploadPicture(path, type)
+=======
+		const user = new User(dbName)
+		await user.register(body.user, body.pass)
+		await user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.user)
+		//logs user in after regestry
+		await user.login(body.user, body.pass)
+		ctx.session.authorised = true
+		//saving user name in session auth
+		ctx.session.user = body.user
+>>>>>>> refs/remotes/origin/master
+		// redirect to the home page
+		ctx.redirect(`/?msg=new user "${body.user}" added`)
+	} catch (err) {
+		await ctx.render('error', {
+			message: err.message
+		})
+	}
+})
 router.get('/login', async ctx => {
 	const data = {}
 	if (ctx.query.msg) data.msg = ctx.query.msg
