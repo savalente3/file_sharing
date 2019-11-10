@@ -1,4 +1,3 @@
-
 'use strict'
 
 const bcrypt = require('bcrypt-promise')
@@ -16,7 +15,8 @@ module.exports = class User {
 			const validator = new Validator()
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
-			const sql = 'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, email TEXT, pass TEXT);'
+			const sql = 'CREATE TABLE IF NOT EXISTS users' +
+			'(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, email TEXT, pass TEXT);'
 			await this.db.run(sql)
 			return this
 		})()
@@ -36,8 +36,6 @@ module.exports = class User {
 
 	async uploadPicture(path, mimeType, user) {
 		const extension = mime.extension(mimeType)
-		// console.log(`path: ${path}`)
-		// console.log(`extension: ${extension}`)
 		await fs.copy(path, `public/avatars/${user}.${extension}`)
 	}
 
