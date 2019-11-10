@@ -3,9 +3,7 @@
 /* MODULE IMPORTS */
 const sql = require('sqlite-async')
 
-module.exports = class Validator {
-    constructor() { }
-    
+module.exports = class Validator {    
     async userVal(user) {
         if(user.length === 0) throw new Error('Missing username.') 
     }
