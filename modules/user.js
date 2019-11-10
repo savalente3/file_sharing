@@ -6,13 +6,13 @@ const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
 
-const Validator = require('./userVal')
+//const Validator = require('./userVal')
 
 module.exports = class User {
 
 	constructor(dbName = ':memory:') {
 		return (async() => {
-			const validator = new Validator()
+			//const validator = new Validator()
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
 			const sql = 'CREATE TABLE IF NOT EXISTS users' +
@@ -24,7 +24,7 @@ module.exports = class User {
 
 	async register(user, email, pass) {
 		try {
-			this.validator.userVal(user)
+			//this.validator.userVal(user)
 			pass = await bcrypt.hash(pass, saltRounds)
 			const sql = `INSERT INTO users(user, email, pass) VALUES("${user}", "${email}", "${pass}")`
 			await this.db.run(sql)
