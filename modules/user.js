@@ -1,4 +1,3 @@
-
 'use strict'
 
 const bcrypt = require('bcrypt-promise')
@@ -7,27 +6,27 @@ const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
 
+const Validator = require('./userVal')
+
 module.exports = class User {
 
 	constructor(dbName = ':memory:') {
 		return (async() => {
+			const validator = new Validator()
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
-			const sql = 'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, pass TEXT);'
+			const sql = 'CREATE TABLE IF NOT EXISTS users' +
+			'(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, email TEXT, pass TEXT);'
 			await this.db.run(sql)
 			return this
 		})()
 	}
 
-	async register(user, pass) {
+	async register(user, email, pass) {
 		try {
-			if(user.length === 0) throw new Error('missing user')
-			if(pass.length === 0) throw new Error('missing password')
-			let sql = `SELECT COUNT(id) as records FROM users WHERE user="${user}";`
-			const data = await this.db.get(sql)
-			if(data.records !== 0) throw new Error(`user "${user}" already in use`)
+			this.validator.userVal(user)
 			pass = await bcrypt.hash(pass, saltRounds)
-			sql = `INSERT INTO users(user, pass) VALUES("${user}", "${pass}")`
+			const sql = `INSERT INTO users(user, email, pass) VALUES("${user}", "${email}", "${pass}")`
 			await this.db.run(sql)
 			return true
 		} catch(err) {
@@ -37,8 +36,6 @@ module.exports = class User {
 
 	async uploadPicture(path, mimeType, user) {
 		const extension = mime.extension(mimeType)
-		// console.log(`path: ${path}`)
-		// console.log(`extension: ${extension}`)
 		await fs.copy(path, `public/avatars/${user}.${extension}`)
 	}
 
