@@ -7,6 +7,8 @@ const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
 
+const Validator = require('./userVal')
+
 module.exports = class User {
 
 	constructor(dbName = ':memory:') {
@@ -19,15 +21,14 @@ module.exports = class User {
 		})()
 	}
 
-	async register(user, pass) {
+	async register(user, email, pass) {
 		try {
-			if(user.length === 0) throw new Error('missing username')
-			if(pass.length === 0) throw new Error('missing password')
-			let sql = `SELECT COUNT(id) as records FROM users WHERE user="${user}";`
-			const data = await this.db.get(sql)
-			if(data.records !== 0) throw new Error(`username "${user}" already in use`)
+			const val = await new Validator()
+			val.userVal(user)
+			val.emailVal(email)
+			val.passVal(pass)
 			pass = await bcrypt.hash(pass, saltRounds)
-			sql = `INSERT INTO users(user, pass) VALUES("${user}", "${pass}")`
+			sql = `INSERT INTO users(user, email, pass) VALUES("${user}", "${email}" "${pass}")`
 			await this.db.run(sql)
 			return true
 		} catch(err) {
