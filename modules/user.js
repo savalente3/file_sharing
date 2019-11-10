@@ -1,4 +1,3 @@
-
 'use strict'
 
 const bcrypt = require('bcrypt-promise')
@@ -37,8 +36,6 @@ module.exports = class User {
 
 	async uploadPicture(path, mimeType, user) {
 		const extension = mime.extension(mimeType)
-		// console.log(`path: ${path}`)
-		// console.log(`extension: ${extension}`)
 		await fs.copy(path, `public/avatars/${user}.${extension}`)
 	}
 
