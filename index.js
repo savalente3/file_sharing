@@ -33,7 +33,7 @@ app.use(views(`${__dirname}/views`, {
 	options: {
 		partials: {
 			navbar: `${__dirname}/views/partials/nav.handlebars`,
-			foot: `${__dirname}/views/partials/footer.handlebars`
+			footer: `${__dirname}/views/partials/footer.handlebars`
 		}
 	},
 	map: {
@@ -52,7 +52,11 @@ const dbName = 'website.db'
  * @name Home Page
  * @route {GET} /
  */
-router.get('/', async ctx => await ctx.render('homepage'))
+router.get('/', async ctx => {
+	await ctx.render('homepage', {user: ctx.session.user})
+	
+})
+
 
 /**
  * The user registration page.
@@ -60,8 +64,20 @@ router.get('/', async ctx => await ctx.render('homepage'))
  * @name Register Page
  * @route {GET} /register
  */
-router.get('/register', async ctx => await ctx.render('register'))
+router.get('/register', async ctx => {
+	try{
+		if (ctx.session.authorised == true) {
+			ctx.redirect('/?msg=user already loged in')
+		}else{
+			await ctx.render('register')
+		}
 
+	}catch (err) {
+		await ctx.render('error', {
+			message: err.message
+		})
+	}
+})
 /**
  * The user download page.
  *
@@ -88,13 +104,19 @@ router.post('/register', koaBody, async ctx => {
 	try {
 		// extract the data from the request
 		const body = ctx.request.body
-		console.log(body)
+		//console.log(body)
 		// call the functions in the module
 		const user = await new User(dbName)
 		await user.register(body.user, body.pass)
-		// await user.uploadPicture(path, type)
+		console.log(ctx.request.files.avatar)
+		await user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.user)
+		//logs user in after regestry 
+		await user.login(body.user, body.pass)
+		ctx.session.authorised = true
+		//saving user name in session auth
+		ctx.session.user = body.user
 		// redirect to the home page
-		ctx.redirect(`/?msg=new user "${body.name}" added`)
+		ctx.redirect(`/?msg=new user "${body.user}" added`)
 	} catch (err) {
 		await ctx.render('error', {
 			message: err.message
@@ -109,6 +131,19 @@ router.get('/login', async ctx => {
 
 	console.log(data)
 	await ctx.render('login', data)
+
+	try{
+		if (ctx.session.authorised == true) {
+			ctx.redirect('/?msg=user already loged in')
+		}else{
+			await ctx.render('login')
+		}
+
+	}catch (err) {
+		await ctx.render('error', {
+			message: err.message
+		})
+	}
 })
 
 router.post('/login', async ctx => {
@@ -117,6 +152,7 @@ router.post('/login', async ctx => {
 		const user = await new User(dbName)
 		await user.login(body.user, body.pass)
 		ctx.session.authorised = true
+		ctx.session.user = body.user
 		return ctx.redirect('/?msg=you are now logged in...')
 	} catch (err) {
 		await ctx.render('error', {
@@ -127,6 +163,7 @@ router.post('/login', async ctx => {
 
 router.get('/logout', async ctx => {
 	ctx.session.authorised = null
+	ctx.session.user = null
 	ctx.redirect('/?msg=you are now logged out')
 })
 
