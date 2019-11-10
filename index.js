@@ -54,7 +54,6 @@ const dbName = 'website.db'
  */
 router.get('/', async ctx => {
 	await ctx.render('homepage', {user: ctx.session.user})
-	
 })
 
 
