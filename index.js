@@ -94,22 +94,18 @@ router.get('/about', async ctx => await ctx.render('about'))
 router.post('/register', koaBody, async ctx => {
 	try {
 		const body = ctx.request.body
-<<<<<<< HEAD
 		console.log(body)
 		// call the functions in the module
 		const user = await new User(dbName)
 		await user.register(body.user, body.email, body.pass)
 		// await user.uploadPicture(path, type)
-=======
-		const user = new User(dbName)
-		await user.register(body.user, body.pass)
 		await user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.user)
 		//logs user in after regestry
 		await user.login(body.user, body.pass)
 		ctx.session.authorised = true
 		//saving user name in session auth
 		ctx.session.user = body.user
->>>>>>> refs/remotes/origin/master
+		
 		// redirect to the home page
 		ctx.redirect(`/?msg=new user "${body.user}" added`)
 	} catch (err) {

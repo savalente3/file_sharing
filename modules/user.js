@@ -23,12 +23,10 @@ module.exports = class User {
 
 	async register(user, email, pass) {
 		try {
-<<<<<<< HEAD
+			
 			if(user.length === 0) throw new Error('missing username')
 			if(email.lenght === 0) throw new Error('missing email')
-=======
 			if(user.length === 0) throw new Error('missing user')
->>>>>>> refs/remotes/origin/master
 			if(pass.length === 0) throw new Error('missing password')
 			let sql = `SELECT COUNT(id) as records FROM users WHERE user="${user}";`
 			const data = await this.db.get(sql)
