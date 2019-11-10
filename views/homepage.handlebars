@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Website Name</title>
+	<title>File Sharing</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="Free File Sharing Tool">
 	<meta name="keywords" content="file, sharing, free, software,engineering">
@@ -16,23 +16,25 @@
 	<!-- nav bar imported from nav.handlebars using partials-->
 	{{>navbar}}
 
-	<section class="greyUploadContainer">
-		<h2>Drag and Drop your File Here</h2>
-		<tr><strong>or</strong></tr><br>
-		<form action="">
-			<input type="file" name="myFile" value="Browse your Computer"> <br>
-			<section>
-				<h2>To: </h2><input type="text" name="user" value="email@email.com">
-				<br>
-				<input type="submit" value="Send File">
-			</section>
-		</form>
-	</section>
+	<article class="container">
+		<section class="greyUploadContainer">
+			<h2>Drag and Drop your File Here</h2>
+			<tr><strong>or</strong></tr><br>
+			<form action="">
+				<input type="file" name="myFile" value="Browse your Computer"> <br>
+				<section>
+					<h2>To: </h2><input type="text" name="user" value="email@email.com">
+					<br>
+					<input type="submit" value="Send File">
+				</section>
+			</form>
+		</section>
 
-	<aside class="greyVideoContainer">
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/C0DPdy98e4c" frameborder="0"
-			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</aside>
+		<section class="greyVideoContainer">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/C0DPdy98e4c" frameborder="0"
+				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</section>
+	</article>
 	<footer>
 		{{>footer}}
 	</footer>
