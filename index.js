@@ -102,9 +102,10 @@ router.get('/about', async ctx => await ctx.render('about'))
 router.post('/register', koaBody, async ctx => {
 	try {
 		const body = ctx.request.body
+		console.log(body)
 		// call the functions in the module
 		const user = await new User(dbName)
-		await user.register(body.user, body.pass)
+		await user.register(body.user, body.email, body.pass)
 		await user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.user)
 		//logs user in after registry
 		await user.login(body.user, body.pass)
