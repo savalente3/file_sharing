@@ -256,6 +256,7 @@ li.dropdown {
   text-align: center;
 }
 
+<<<<<<< HEAD
 #registerButton, #registerButton > a, input[type=submit]{
   background-color:  #426A5A;
   text-decoration: none!important;
@@ -265,6 +266,11 @@ li.dropdown {
   border: none;
   padding-top: 3%;
   padding-bottom: 3%;
+=======
+
+.dropbtn {
+  display: inline-block;
+>>>>>>> guilherme
   color: white;
   margin-top: 10px;
 }
