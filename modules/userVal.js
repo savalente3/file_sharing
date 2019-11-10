@@ -4,9 +4,9 @@
 const sqlite = require('sqlite-async')
 
 module.exports = class Validator {
-    constructor(){}
+    constructor() { }
     
-    async userVal(user){
+    async userVal(user) {
         if(user.length === 0) throw new Error('Missing username.')
 
         if(user.lenght >= 20) throw new Error('Username too long. Must be less than 20 characters')
@@ -17,11 +17,11 @@ module.exports = class Validator {
 		if(data.records !== 0) throw new Error(`Username "${user}" already in use.`)
     }
 
-    async emailVal(email){
+    async emailVal(email) {
         if(email.length === 0) throw new Error('Missing email.')
     }
 
-    async passVal(pass){
+    async passVal(pass) {
         if(pass.length === 0) throw new Error('Missing password.')
     }
 

@@ -13,6 +13,7 @@ module.exports = class User {
 
 	constructor(dbName = ':memory:') {
 		return (async() => {
+			const validator = new Validator()
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
 			const sql = 'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, email TEXT, pass TEXT);'
@@ -23,16 +24,9 @@ module.exports = class User {
 
 	async register(user, email, pass) {
 		try {
-			
-			if(user.length === 0) throw new Error('missing username')
-			if(email.lenght === 0) throw new Error('missing email')
-			if(user.length === 0) throw new Error('missing user')
-			if(pass.length === 0) throw new Error('missing password')
-			let sql = `SELECT COUNT(id) as records FROM users WHERE user="${user}";`
-			const data = await this.db.get(sql)
-			if(data.records !== 0) throw new Error(`user "${user}" already in use`)
+			this.validator.userVal(user)
 			pass = await bcrypt.hash(pass, saltRounds)
-			sql = `INSERT INTO users(user, email, pass) VALUES("${user}", "${email}", "${pass}")`
+			const sql = `INSERT INTO users(user, email, pass) VALUES("${user}", "${email}", "${pass}")`
 			await this.db.run(sql)
 			return true
 		} catch(err) {
