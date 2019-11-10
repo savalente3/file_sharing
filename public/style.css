@@ -32,6 +32,8 @@
 	right: 0;
   margin: auto;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .greyVideoContainer{
@@ -47,6 +49,8 @@
 	right: 0;
   margin: auto;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
  /*
