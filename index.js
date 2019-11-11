@@ -19,6 +19,7 @@ const session = require('koa-session')
 
 /* IMPORT CUSTOM MODULES */
 const User = require('./modules/user')
+const Validator = require('./modules/userVal')
 
 const app = new Koa()
 const router = new Router()
@@ -104,16 +105,21 @@ router.post('/register', koaBody, async ctx => {
 		const body = ctx.request.body
 		// call the functions in the module
 		const user = await new User(dbName)
-		await user.register(body.user, body.email, body.pass)
-		// await user.uploadPicture(path, type)
-		await user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.user)
-		//logs user in after registry
-		await user.login(body.user, body.pass)
+		const valid = await new Validator()
+        
+		await valid.userVal(body.username)
+		await user.register(body.username, body.email, body.pass)
+
+		await user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.username)
+
+		await user.login(body.username, body.pass)
 		ctx.session.authorised = true
 		//saving user name in session auth
-		ctx.session.user = body.user
-		ctx.redirect(`/?msg=new user "${body.user}" added`)
+		ctx.session.user = body.username
+		ctx.redirect(`/?msg=new user "${body.username}" added`)
+		user.db.close()
 	} catch (err) {
+		console.log(err)
 		await ctx.render('error', {
 			message: err.message
 		})
