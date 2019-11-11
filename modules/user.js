@@ -5,6 +5,7 @@ const fs = require('fs-extra')
 const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
+const Validator = require('./userVal')
 
 module.exports = class User {
 
@@ -21,10 +22,13 @@ module.exports = class User {
 
 	async register(user, email, pass) {
 		try {
+			const valid = await new Validator()
+			await valid.userVal(user)
+			await valid.emailVal(email)
+			await valid.passVal(pass)
 			pass = await bcrypt.hash(pass, saltRounds)
 			let sql = `SELECT count(id) AS count FROM users WHERE username="${user}";`
 			const records = await this.db.get(sql)
-			console.log(records.count)
 			if(records.count !== 0) throw new Error('Username already in use.')
 			sql = `INSERT INTO users(username, email, pass) VALUES("${user}", "${email}", "${pass}")`
 			await this.db.run(sql)

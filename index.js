@@ -64,8 +64,8 @@ router.get('/', async ctx => {
  * @name Register Page
  * @route {GET} /register
  */
-router.get('/register', async ctx => {
-	try{
+router.get('/register', koaBody, async ctx => {
+	try{	
 		if (ctx.session.authorised === true) {
 			ctx.redirect('/?msg=user already loged in')
 		}else{
@@ -105,13 +105,8 @@ router.post('/register', koaBody, async ctx => {
 		const body = ctx.request.body
 		// call the functions in the module
 		const user = await new User(dbName)
-		const valid = await new Validator()
-        
-		await valid.userVal(body.username)
 		await user.register(body.username, body.email, body.pass)
-
 		await user.uploadPicture(ctx.request.files.avatar.path, 'image/png', body.username)
-
 		await user.login(body.username, body.pass)
 		ctx.session.authorised = true
 		//saving user name in session auth
