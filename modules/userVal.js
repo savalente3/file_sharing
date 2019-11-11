@@ -22,12 +22,6 @@ module.exports = class Validator {
 
  		if (user.length >= 20) throw new Error('Username too long. Must be less than 20 characters')
 
- 		// Check if there is no other user with the same username
-		const sql = `SELECT COUNT(id) AS count FROM users WHERE username="${user}";`
-		const records = await this.db.get(sql)
-		console.log(records.count)
-		if(records.count !== 0) throw new Error('Username already in use.')
-		
         } catch(err) {
             throw err
         }

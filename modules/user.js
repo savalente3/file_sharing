@@ -16,39 +16,42 @@ module.exports = class User {
 			'(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);'
 			await this.db.run(sql)
 			return this
-		})()		
-		
+		})()
 	}
 
-	async register(username, email, pass) {
+	async register(user, email, pass) {
 		try {
 			pass = await bcrypt.hash(pass, saltRounds)
-			const sql = `INSERT INTO users(username, email, pass) VALUES("${username}", "${email}", "${pass}")`
+			let sql = `SELECT count(id) AS count FROM users WHERE username="${user}";`
+			const records = await this.db.get(sql)
+			console.log(records.count)
+			if(records.count !== 0) throw new Error('Username already in use.')
+			sql = `INSERT INTO users(username, email, pass) VALUES("${user}", "${email}", "${pass}")`
 			await this.db.run(sql)
-			console.log(sql)
 			return true
 		} catch(err) {
 			throw err
 		}
 	}
 
-	async uploadPicture(path, mimeType, username) {
+	async uploadPicture(path, mimeType, user) {
 		const extension = mime.extension(mimeType)
-		await fs.copy(path, `public/avatars/${username}.${extension}`)
+		await fs.copy(path, `public/avatars/${user}.${extension}`)
 	}
 
-	async login(username, password) {
+	async login(user, password) {
 		try {
-			let sql = `SELECT count(id) AS count FROM users WHERE username="${username}";`
+			let sql = `SELECT count(id) AS count FROM users WHERE username = "${user}";`
 			const records = await this.db.get(sql)
-			if(!records.count) throw new Error(`user "${username}" not found`)
-			sql = `SELECT pass FROM users WHERE username = "${username}";`
+			if(!records.count) throw new Error(`user "${user}" not found`)
+			sql = `SELECT pass FROM users WHERE username = "${user}";`
 			const record = await this.db.get(sql)
 			const valid = await bcrypt.compare(password, record.pass)
-			if(valid === false) throw new Error(`invalid password for account "${username}"`)
+			if(valid === false) throw new Error(`invalid password for account "${user}"`)
 			return true
 		} catch(err) {
 			throw err
 		}
 	}
+
 }
