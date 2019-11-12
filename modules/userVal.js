@@ -4,7 +4,7 @@
 const sqlite = require('sqlite-async')
 
 module.exports = class Validator {
-    constructor(dbName = ':memory:') {
+	constructor(dbName = ':memory:') {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
@@ -12,18 +12,18 @@ module.exports = class Validator {
 			'(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);'
 			await this.db.run(sql)
 			return this
-		})()		
-		
+		})()
+
 	}
 
  	async userVal(user) {
-        try{
+		try{
  		if (user.length === 0) throw new Error('Missing username.')
  		if (user.length >= 20) throw new Error('Username too long. Must be less than 20 characters')
-        } catch(err) {
-            throw err
-        }
-    }
+		} catch(err) {
+			throw err
+		}
+	}
 
  	async emailVal(email) {
 		const atPos = email.indexOf('@')
@@ -39,4 +39,4 @@ module.exports = class Validator {
 		if(pass.length > 20 || pass.lenght < 8) throw new Error('The password needs to have between 8 and 20 characters.')
  	}
 
- }
+}
