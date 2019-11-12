@@ -152,6 +152,7 @@
    position: fixed;
    top: 0;
    width: 100%;
+   max-height: 85px;
  }
 
  ul.navformating,
@@ -168,7 +169,6 @@
  li.floatRightNav {
    float: right;
    padding-top: 20px;
-
  }
 
  nav>ul>li>a {
@@ -189,10 +189,14 @@
  }
 
  img.roundcorner{
- 
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 50%;  
+  margin-top: 0px!important;
+  float: right;
+  margin-left: 20px!important;
+  position: relative;
+  top: 5px;
  }
 
   /*
@@ -242,14 +246,15 @@ li.dropdown {
    left: 0;
    bottom: 0;
    width: 100%;
-   padding: 20px;
+   padding: 0.5%;
+   max-height: 5%;
  }
 
  article>ul>li,
  article>ul>li>a {
    display: block;
    color: darkgrey;
-   padding: 2px 30px 2px 30px;
+   padding: 1px 30px 1px 30px;
    text-decoration: none;
    float: left;
  }
