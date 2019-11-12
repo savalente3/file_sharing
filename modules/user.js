@@ -5,18 +5,16 @@ const fs = require('fs-extra')
 const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
-
-//const Validator = require('./userVal')
+const Validator = require('./userVal')
 
 module.exports = class User {
 
 	constructor(dbName = ':memory:') {
 		return (async() => {
-			//const validator = new Validator()
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
 			const sql = 'CREATE TABLE IF NOT EXISTS users' +
-			'(id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, email TEXT, pass TEXT);'
+			'(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);'
 			await this.db.run(sql)
 			return this
 		})()
@@ -24,9 +22,15 @@ module.exports = class User {
 
 	async register(user, email, pass) {
 		try {
-			//this.validator.userVal(user)
+			const valid = await new Validator()
+			await valid.userVal(user)
+			await valid.emailVal(email)
+			await valid.passVal(pass)
 			pass = await bcrypt.hash(pass, saltRounds)
-			const sql = `INSERT INTO users(user, email, pass) VALUES("${user}", "${email}", "${pass}")`
+			let sql = `SELECT count(id) AS count FROM users WHERE username="${user}";`
+			const records = await this.db.get(sql)
+			if(records.count !== 0) throw new Error('Username already in use.')
+			sql = `INSERT INTO users(username, email, pass) VALUES("${user}", "${email}", "${pass}")`
 			await this.db.run(sql)
 			return true
 		} catch(err) {
@@ -41,10 +45,10 @@ module.exports = class User {
 
 	async login(user, password) {
 		try {
-			let sql = `SELECT count(id) AS count FROM users WHERE user="${user}";`
+			let sql = `SELECT count(id) AS count FROM users WHERE username = "${user}";`
 			const records = await this.db.get(sql)
 			if(!records.count) throw new Error(`user "${user}" not found`)
-			sql = `SELECT pass FROM users WHERE user = "${user}";`
+			sql = `SELECT pass FROM users WHERE username = "${user}";`
 			const record = await this.db.get(sql)
 			const valid = await bcrypt.compare(password, record.pass)
 			if(valid === false) throw new Error(`invalid password for account "${user}"`)
