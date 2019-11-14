@@ -13,7 +13,11 @@
    padding: 1em;
  }
 
- /*
+ section {
+  padding-top: 85px;
+ }
+
+/*
 * 
 *  Download page css code
 * 
@@ -21,7 +25,6 @@
  .container {
    display: grid;
    grid-template-columns: 40% auto;
-
  }
 
  article.previewBox {
@@ -202,7 +205,7 @@ li.dropdown {
 .dropdown:hover .dropdown-content {
   display: block;
 }
- /*
+/*
 *
 * Footer css code
 *
@@ -249,7 +252,7 @@ li.dropdown {
    display: inline-grid;
    grid-template-columns: auto auto;
  }
- /*
+/*
 *
 * log in css code
 *
@@ -296,4 +299,22 @@ input[type=text], input[type=password]{
 input[type=file]{
   padding-left: 70px;
   margin-top: 5px;
+}
+
+/*
+*
+* single download link css code
+*
+*/
+#singleDownloadButton {
+  background-color:  #426A5A;
+  text-decoration: none!important;
+  padding: 5%;
+  font-size: 14pt;
+  border-radius: 10px;
+  border: none;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  color: white;
+  margin-top: 10px;
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<link href="/style.css" type="text/css" rel="stylesheet">
+
+<head>
+    <title>Website Name</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Free File Sharing Tool">
+	<meta name="keywords" content="file, sharing, free, software,engineering">
+	<meta name="author" content="Green Night Dwellers">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="container">
+        {{>navbar}}
+
+        <section>
+            <strong>Your file '{{fileName}}' is ready to be downloaded!</strong>
+            
+            <p id="singleDownloadButton"><button><a href={{filePath}} download={{fileName}}>DOWNLOAD</a></button></p>
+        </section>
+
+        {{>footer}}
+</body>
+
+</html>

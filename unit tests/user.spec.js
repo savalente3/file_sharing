@@ -4,7 +4,6 @@
 const Accounts = require('../modules/user.js')
 
 describe('register()', () => {
-
 	test('register a valid account', async done => {
 		expect.assertions(1)
 		const account = await new Accounts()
@@ -18,26 +17,9 @@ describe('register()', () => {
 		const account = await new Accounts()
 		await account.register('doej', 'password')
 		await expect( account.register('doej', 'password') )
-			.rejects.toEqual( Error('username "doej" already in use') )
+			.rejects.toEqual( Error(''Username already in use.'') )
 		done()
 	})
-
-	test('error if blank username', async done => {
-		expect.assertions(1)
-		const account = await new Accounts()
-		await expect( account.register('', 'password') )
-			.rejects.toEqual( Error('missing username') )
-		done()
-	})
-
-	test('error if blank password', async done => {
-		expect.assertions(1)
-		const account = await new Accounts()
-		await expect( account.register('doej', '') )
-			.rejects.toEqual( Error('missing password') )
-		done()
-	})
-
 })
 
 describe('uploadPicture()', () => {
