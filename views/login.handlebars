@@ -20,15 +20,17 @@
 		<form action="/login" method="post">
 			<br>
 			<p>Username:<br/>
+			<br>
 			<input type="text" name="user" placeholder="your username" value="{{user}}" autofocus></p>
 			
 			<p>Password:<br/>
+			<br>
 			<input type="password" name="pass" placeholder="your password" value=""></p>
-			<p><input type="submit" value="Log in"></p>
+			<p><input id="registerButton" type="submit" value="Log in"></p>
 		</form>
 		
 		<button id="registerButton">
-			<a href="/register">Register</a>
+			<a href="/{{crytp}}">Register</a>
 		</button>
 	</article>
 	{{>footer}}

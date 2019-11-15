@@ -4,8 +4,8 @@
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
    margin: 0;
    padding: 0;
- } 
- 
+ }
+
  .msg {
    border: 1px solid red;
    font-weight: bold;
@@ -19,34 +19,44 @@
 *
 */
 
-.greyUploadContainer{
+form > h3{
+text-align: left;
+padding-left: 12%;
+margin: 0;
+}
+
+ .homePageContainer {
   background-color: darkgrey;
-  border-radius: 10px;
-  padding: 2%;
-  width: 60%;
-	height: 415px;
-	top:0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-  margin: auto;
+  border-radius: 15px;
+  padding: auto;
+  margin: auto 20px auto 100px;
   text-align: center;
 }
 
-.greyVideoContainer{
-  background-color: darkgrey;
-  border-radius: 10px;
-  padding: 2%;
-  width: 660px;
-	height: 415px;
-	top:0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-  margin: auto;
-  text-align: center;
+.marginRight{
+  align-content: center;
+  margin: auto 100px auto 20px !important;
 }
 
+.box{
+  font-size: 1.25rem; /* 20 */
+  background-color: #426A5A;
+  opacity: 0.7;
+  margin: 5%;
+  padding: 100px 20px;
+  border-radius: 25px;
+ }
+
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}
+
+iframe{
+  margin-top: 8%; 
+  margin-bottom: 8%;
+ }
  /*
 * 
 *  Download page css code
@@ -55,6 +65,8 @@
  .container {
    display: grid;
    grid-template-columns: 40% auto;
+   position: relative;
+   top: 2%;
  }
 
  article.previewBox {
@@ -91,9 +103,6 @@
    width: 75%;
  }
 
- #downloadButton {
-   margin-top: 5%;
- }
 
  /* button {
    transition-duration: 0.3s;
@@ -130,6 +139,10 @@
 
  }
 
+ form > #registerButton, 
+ .greyContainer > #registerButton{
+   margin-bottom: 20px !important;
+ }
 
  #AboutProject {
    float: right;
@@ -188,53 +201,54 @@
    float: left;
  }
 
- img.roundcorner{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;  
-  margin-top: 0px!important;
-  float: right;
-  margin-left: 20px!important;
-  position: relative;
-  top: 5px;
+ img.roundcorner {
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   margin-top: 0px !important;
+   float: right;
+   margin-left: 20px !important;
+   position: relative;
+   top: 5px;
  }
 
-  /*
+ /*
 *
 * drop down log in css code
 *
 */
-.dropbtn {
-  display: inline-block;
-  color: white;
-  text-decoration: none;
-}
+ .dropbtn {
+   display: inline-block;
+   color: white;
+   text-decoration: none;
+ }
 
-li.dropdown {
-  display: inline-block;
-}
+ li.dropdown {
+   display: inline-block;
+ }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 52px;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 20px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+ .dropdown-content {
+   display: none;
+   position: absolute;
+   top: 52px;
+   background-color: #f9f9f9;
+   min-width: 160px;
+   box-shadow: 20px 8px 16px 0px rgba(0, 0, 0, 0.2);
+   z-index: 1;
+ }
 
-.dropdown-content a {
-  color: #313638;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-}
+ .dropdown-content a {
+   color: #313638;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+   text-align: center;
+ }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+ .dropdown:hover .dropdown-content {
+   display: block;
+ }
+
  /*
 *
 * Footer css code
@@ -266,9 +280,7 @@ li.dropdown {
  .iconFormating {
    padding-left: 400px !important;
    padding-right: 0 !important;
-
  }
-
 
  section>ul>li>a {
    display: block;
@@ -278,55 +290,63 @@ li.dropdown {
    float: right;
  }
 
-#grid2Columns {
+ #grid2Columns {
    display: inline-grid;
    grid-template-columns: auto auto;
  }
+
  /*
 *
 * log in css code
 *
 */
-.greyContainer{
-  background-color: darkgrey;
-  border-radius: 10px;
-  position: absolute;
-  padding: 2%;
-  width: 30%;
-	height: 55%;
-	top:0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-  margin: auto;
-  text-align: center;
-}
 
-#registerButton, #registerButton > a, input[type=submit]{
-  background-color:  #426A5A;
-  text-decoration: none!important;
-  padding: 5%;
-  font-size: 14pt;
-  border-radius: 10px;
-  border: none;
-  padding-top: 3%;
-  padding-bottom: 3%;
-  color: white;
-  margin-top: 10px;
-}
+ .greyContainer {
+   background-color: darkgrey;
+   border-radius: 10px;
+   position: absolute;
+   padding: 2%;
+   width: 30%;
+   height: 60%;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   margin: auto;
+   text-align: center;
+ }
 
-#registerButton:hover, input[type=submit]:hover {
-  background-color: #426A5A;
-  opacity: 0.5;
-}
-input[type=text], input[type=password]{
-  width: 40%;
-  height: 80%;
-  padding: 2%;
-  margin: 2%;
-}
+ #registerButton,
+ #registerButton>a {
+   background-color: #426A5A;
+   text-decoration: none !important;
+   padding: 7%;
+   font-size: 14pt;
+   border-radius: 25px;
+   border: none;
+   padding-top: 3%;
+   padding-bottom: 3%;
+   color: white;
+   margin-top: 10px;
+ }
 
-input[type=file]{
-  padding-left: 70px;
-  margin-top: 5px;
-}
+ #registerButton:hover
+{
+   background-color: #426A5A;
+   opacity: 0.5;
+ }
+
+ input[type=text],
+ input[type=password] {
+   width: 50%;
+   height: 18px;
+   padding: 2%;
+   margin: 0%;
+   margin-bottom: 5%;
+   border-radius: 20px;
+ }
+
+ input[type=file] {
+   padding-left: 70px;
+   margin-top: 5px;
+ }
