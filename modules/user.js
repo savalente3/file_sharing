@@ -23,9 +23,9 @@ module.exports = class User {
 	async register(user, email, pass) {
 		try {
 			const valid = await new Validator()
+			await valid.passVal(pass)
 			await valid.userVal(user)
 			await valid.emailVal(email)
-			await valid.passVal(pass)
 			pass = await bcrypt.hash(pass, saltRounds)
 			let sql = `SELECT count(id) AS count FROM users WHERE username="${user}";`
 			const records = await this.db.get(sql)

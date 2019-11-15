@@ -19,10 +19,11 @@ const session = require('koa-session')
 
 /* IMPORT CUSTOM MODULES */
 const User = require('./modules/user')
-const Validator = require('./modules/userVal')
+const Download = require('./modules/download')
 
 const app = new Koa()
 const router = new Router()
+
 
 /* CONFIGURING THE MIDDLEWARE */
 app.keys = ['darkSecret']
@@ -65,7 +66,7 @@ router.get('/', async ctx => {
  * @route {GET} /register
  */
 router.get('/register', koaBody, async ctx => {
-	try{	
+	try{
 		if (ctx.session.authorised === true) {
 			ctx.redirect('/?msg=user already loged in')
 		}else{
@@ -79,12 +80,27 @@ router.get('/register', koaBody, async ctx => {
 	}
 })
 /**
- * The user download page.
+ * The user download list page.
  *
- * @name Download Page
- * @route {GET} /download
+ * @name MyDownloads Page
+ * @route {GET} /myDownloads
  */
-router.get('/download', async ctx => await ctx.render('download'))
+router.get('/myDownloads/:downloadId', async ctx => await ctx.render('myDownloads'))
+
+/**
+ * The single download page.
+ *
+ * @name FileDownload Page
+ * @route {GET} /downloadFile
+ */
+router.get('/downloadFile/:downloadId', async ctx => {
+	const fileSender = await new Download(dbName)
+
+	//await fileSender.addDummy()
+	const download = await fileSender.download(ctx.params.downloadId)
+	const downloadName = await fileSender.getName(ctx.params.downloadId)
+	await ctx.render('downloadFile', {filePath: download.filePath, fileName: downloadName.fileName})
+})
 
 /**
  * The website about page.
