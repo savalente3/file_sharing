@@ -3,21 +3,25 @@
          <ul class="navformating">
              <li class="floatRightNav"> <a href="#"> About Us</a></li>
              <li class="dropdown floatRightNav">
+
             {{!--check if there is user in session and changes the log in to the user name--}}
              {{#if user}}
 		        <a href="javascript:void(0)" class="dropbtn">Hello, {{user}} </a>
              {{else}}
                 <a href="javascript:void(0)" class="dropbtn">Hello, Log in</a>
              {{/if}}
+            
              <object class="dropdown-content">
                 <a href="/login">Log in</a>
                 <a href="/register">Register</a>
                 <a href="/download">My Downloads</a>
                 <a href="/logout">Log out</a>
              </object>
+             
              {{#if user}}
 		        <li><a href="#"><img src="../../avatars/{{user}}.png" class="roundcorner" width="50" alt="users face"></a></li>                
              {{/if}}
+             
              <li class="floatRightNav">  <img src="../../images/alarm.png" width="25" alt=""></li>
              <li class="logo"> <a href="/"> <img src="../../images/logo.png" width="60" alt=""></a></li>
          </ul>
