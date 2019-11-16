@@ -86,7 +86,7 @@ router.get('/register', koaBody, async ctx => {
  * @name MyDownloads Page
  * @route {GET} /myDownloads
  */
-router.get('/myDownloads/:downloadId', async ctx => await ctx.render('myDownloads'))
+router.get('/myDownloads/', async ctx => await ctx.render('myDownloads'))
 
 /**
  * The single download page.
