@@ -24,7 +24,6 @@ const Download = require('./modules/download')
 const app = new Koa()
 const router = new Router()
 
-
 /* CONFIGURING THE MIDDLEWARE */
 app.keys = ['darkSecret']
 app.use(staticDir('public'))
@@ -85,7 +84,9 @@ router.get('/register', koaBody, async ctx => {
  * @name MyDownloads Page
  * @route {GET} /myDownloads
  */
-router.get('/myDownloads/:downloadId', async ctx => await ctx.render('myDownloads'))
+
+// router.get('/myDownloads/:username', async ctx => await ctx.render('myDownloads'))
+router.get('/myDownloads/:downloadId?', async ctx => await ctx.render('login'))
 
 /**
  * The single download page.
