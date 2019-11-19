@@ -6,7 +6,7 @@
 const Router = require('koa-router')
 
 /* IMPORT CUSTOM MODULES */
-const Download = require('../modules/files')
+const Download = require('../modules/filesDownload')
 
 const router = new Router()
 const dbName = 'website.db'
