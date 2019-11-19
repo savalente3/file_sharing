@@ -8,7 +8,7 @@ describe('register()', () => {
 			expect.assertions(1)
 			const account = await new Accounts()
 			const register = await account.register('doej', 'password')
-			expect(register).toBe(true)
+			await expect(register).toBe(true)
 		} catch(err) {
 			throw err
 		} finally {
