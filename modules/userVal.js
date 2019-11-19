@@ -10,8 +10,8 @@ module.exports = class Validator {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
-			const sql = 'CREATE TABLE IF NOT EXISTS users' +
-			'(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);'
+			const sql = `CREATE TABLE IF NOT EXISTS users
+			(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);`
 			await this.db.run(sql)
 			return this
 		})()
@@ -21,7 +21,11 @@ module.exports = class Validator {
  	async userVal(user) {
 		try{
  			if (user.length === 0) throw new Error('Missing username.')
+<<<<<<< HEAD
  			if (user.length >= maxLenght) throw new Error('Username too long. Must be less than 20 characters.')
+=======
+ 			if (user.length >= 20) throw new Error('Username too long. Must be less than 20 characters.')
+>>>>>>> origin/guilherme
 		} catch(err) {
 			throw err
 		}

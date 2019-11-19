@@ -8,6 +8,7 @@ describe('userVal()', () => {
 		try {
 			expect.assertions(1)
 			val.userVal('')
+<<<<<<< HEAD
 			done.fail('test failed')
 
 		} catch(err) {
@@ -17,6 +18,16 @@ describe('userVal()', () => {
 		}
 	})
 
+=======
+			done.fail('test failed')       
+		} catch(err) {
+			expect(err.message).toBe('Missing username.')
+		} finally {
+			done()
+		}
+	})
+
+>>>>>>> origin/guilherme
 	test('Username too long.', async done => {
 		try {
 			expect.assertions(1)
@@ -36,7 +47,11 @@ describe('emailVal()', () => {
 			expect.assertions(1)
 			val.emailVal('')
 			done.fail('test failed')
+<<<<<<< HEAD
 
+=======
+                        
+>>>>>>> origin/guilherme
 		} catch(err) {
 			expect(err.message).toBe('Missing email.')
 		} finally {
@@ -56,7 +71,11 @@ describe('emailVal()', () => {
 		}
 	})
 
+<<<<<<< HEAD
 	test('Email is not lower cased.', async done => {
+=======
+	test('Email is not lower cased.', async done =>{
+>>>>>>> origin/guilherme
 		try {
 			expect.assertions(1)
 			val.emailVal('GOODEMAIL@GMAIL.COM')
@@ -75,7 +94,12 @@ describe('passVal()', () => {
 			expect.assertions(1)
 			val.passVal('')
 			done.fail('test failed')
+<<<<<<< HEAD
 
+		} catch(err) {
+			expect(err.message).toBe('Missing password.')
+=======
+                        
 		} catch(err) {
 			expect(err.message).toBe('Missing password.')
 		} finally {
@@ -90,11 +114,27 @@ describe('passVal()', () => {
 			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('The password needs to have between 8 and 20 characters.')
+>>>>>>> origin/guilherme
 		} finally {
 			done()
 		}
 	})
 
+<<<<<<< HEAD
+	test('Password too short.', async done => {
+		try {
+			expect.assertions(1)
+			val.passVal('1')
+			done.fail('test failed')
+		} catch(err) {
+			expect(err.message).toBe('The password needs to have between 8 and 20 characters.')
+		} finally {
+			done()
+		}
+	})
+
+=======
+>>>>>>> origin/guilherme
 	test('Password too long.', async done => {
 		try {
 			expect.assertions(1)
