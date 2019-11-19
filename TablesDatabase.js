@@ -19,4 +19,9 @@ module.exports = class Table {
         FOREIGN KEY("senderId") REFERENCES "users"("id")
          );`
 	}
+
+	static createUserTable() {
+		return `CREATE TABLE IF NOT EXISTS users
+        (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);`
+	}
 }

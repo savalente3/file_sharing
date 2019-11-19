@@ -9,7 +9,6 @@ describe('userVal()', () => {
 			expect.assertions(1)
 			val.userVal('')
 			done.fail('test failed')
-
 		} catch(err) {
 			expect(err.message).toBe('Missing username.')
 		} finally {
@@ -56,7 +55,7 @@ describe('emailVal()', () => {
 		}
 	})
 
-	test('Email is not lower cased.', async done => {
+	test('Email is not lower cased.', async done =>{
 		try {
 			expect.assertions(1)
 			val.emailVal('GOODEMAIL@GMAIL.COM')

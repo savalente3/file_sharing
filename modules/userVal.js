@@ -1,6 +1,7 @@
 'use strict'
 
 /* MODULE IMPORTS */
+const table = require('../TablesDatabase.js')
 const sqlite = require('sqlite-async')
 const maxLenght = 20
 const minLenght = 8
@@ -10,9 +11,7 @@ module.exports = class Validator {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
-			const sql = 'CREATE TABLE IF NOT EXISTS users' +
-			'(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);'
-			await this.db.run(sql)
+			await this.db.run(table.createUserTable())
 			return this
 		})()
 
