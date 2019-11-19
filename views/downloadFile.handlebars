@@ -15,12 +15,12 @@
 <body class="container">
         {{>navbar}}
 
-        <section>
+        <section class="homePageContainer">
             <strong>Your file '{{fileName}}' is ready to be downloaded!</strong>
             
             <p id="singleDownloadButton"><button><a href={{filePath}} download={{fileName}}>DOWNLOAD</a></button></p>
         </section>
-
+        
         {{>footer}}
 </body>
 

@@ -6,6 +6,8 @@ const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
 const Validator = require('./userVal')
+const maxLenght = 20
+const minLenght = 8
 
 module.exports = class User {
 

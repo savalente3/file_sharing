@@ -1,17 +1,14 @@
 'use strict'
 
 const sqlite = require('sqlite-async')
+const table = require('../TablesDatabase.js')
 
 module.exports = class Download {
 	constructor(dbName = ':memory:') {
 		return (async() => {
 			try{
 				this.db = await sqlite.open(dbName)
-			  // we need this table to store the files info
-				const sql = 'CREATE TABLE IF NOT EXISTS files(downloadId INTEGER PRIMARY KEY AUTOINCREMENT,'
-          + 'receiverEmail TEXT, senderId INTEGER, filePath TEXT, fileName TEXT,'
-				'FOREIGN KEY ("senderId") REFERENCES users("id"));'
-				await this.db.run(sql)
+				await this.db.run(table.createFileTable())
 		  	return this
 			} catch(err) {
 				throw err
@@ -22,12 +19,12 @@ module.exports = class Download {
 	async addDummy() {
 		try{
 			//dummy database records
-			const sqlNew = 'INSERT INTO files(receiverEmail, senderId, filePath, fileName)' +
-        'VALUES("toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")'
+			const sqlNew = `INSERT INTO files(receiverEmail, senderId, filePath, fileName)
+        		VALUES("toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
 			await this.db.run(sqlNew)
 
-			const sqlNew2 = 'INSERT INTO files(receiverEmail, senderId, filePath, fileName)' +
-        'VALUES("jojojojo@gmail.com", 2, "../images/facebook.png", "Facebook Image")'
+			const sqlNew2 = `INSERT INTO files(receiverEmail, senderId, filePath, fileName)
+        		VALUES("jojojojo@gmail.com", 2, "../images/facebook.png", "Facebook Image")`
 			await this.db.run(sqlNew2)
 		} catch(err) {
 			throw err
@@ -42,7 +39,6 @@ module.exports = class Download {
 		} catch(err) {
 			throw err
 		}
-
 	}
 
 	async getName(downloadId) {
