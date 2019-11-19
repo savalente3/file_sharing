@@ -56,7 +56,7 @@ describe('emailVal()', () => {
 		}
 	})
 
-	test('Email is not lower cased.', async done =>{
+	test('Email is not lower cased.', async done => {
 		try {
 			expect.assertions(1)
 			val.emailVal('GOODEMAIL@GMAIL.COM')
