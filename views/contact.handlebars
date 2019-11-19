@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<link href="public/css/style.css" type="text/css" rel="stylesheet">
+
+<head>
+  <title>Email Your File</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Free File Sharing Tool">
+	<meta name="keywords" content="file, sharing, free, software, engineering">
+	<meta name="author" content="Green Night Dwellers">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+  
+</head>
+<body>
+  <section class="formContainer">
+    <h1 class="brand">Green Night Dwellers</h1>
+    <section class="wrapper animated bounceInLeft">
+      <section class="team-info">
+        <h2>Green Night Dwellers boi!</h3>
+        <ul>
+          <li> Email A Link</li>
+          <li> Of Your File To Friend!</li>
+          <li> Courtesy Of GND</li>
+        </ul>
+      </section>
+      <section class="contact">
+        <h3>Email Your File To A Friend</h3>
+        {{msg}}
+        <form method="POST" action="send">
+          <p>
+            <label>Your Name</label>
+            <input type="text" name="name">
+          </p>
+          <p>
+            <label>URL to your file</label>
+            <input type="url" name="url">
+          </p>
+          <p>
+            <label>Email Address You Wish To Send File To</label>
+            <input type="email" name="email">
+          </p>
+          
+          <p class="full">
+            <label>Message</label>
+            <textarea name="message" rows="5"></textarea>
+          </p>
+          <p class="full">
+            <button type="submit">Submit</button>
+          </p>
+        </form>
+      </section>
+    </section>
+  </section>
+</body>
+</html>
