@@ -21,11 +21,7 @@ module.exports = class Validator {
  	async userVal(user) {
 		try{
  			if (user.length === 0) throw new Error('Missing username.')
-<<<<<<< HEAD
  			if (user.length >= maxLenght) throw new Error('Username too long. Must be less than 20 characters.')
-=======
- 			if (user.length >= 20) throw new Error('Username too long. Must be less than 20 characters.')
->>>>>>> origin/guilherme
 		} catch(err) {
 			throw err
 		}
