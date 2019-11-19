@@ -8,7 +8,7 @@ describe('userVal()', () => {
 		try {
 			expect.assertions(1)
 			val.userVal('')
-			done.fail('test failed')       
+			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('Missing username.')
 		} finally {
@@ -35,7 +35,7 @@ describe('emailVal()', () => {
 			expect.assertions(1)
 			val.emailVal('')
 			done.fail('test failed')
-                        
+
 		} catch(err) {
 			expect(err.message).toBe('Missing email.')
 		} finally {
@@ -74,7 +74,7 @@ describe('passVal()', () => {
 			expect.assertions(1)
 			val.passVal('')
 			done.fail('test failed')
-                        
+
 		} catch(err) {
 			expect(err.message).toBe('Missing password.')
 		} finally {
