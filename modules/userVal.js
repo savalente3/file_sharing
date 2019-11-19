@@ -19,32 +19,38 @@ module.exports = class Validator {
 	}
 
  	async userVal(user) {
-        try{
+		try{
  			if (user.length === 0) throw new Error('Missing username.')
- 			if (user.length >= 20) throw new Error('Username too long. Must be less than 20 characters.')
-        } catch(err) {
-            throw err
-        }
-    }
+ 			if (user.length >= maxLenght) throw new Error('Username too long. Must be less than 20 characters.')
+		} catch(err) {
+			throw err
+		}
+	}
 
+ 	// eslint-disable-next-line complexity
  	async emailVal(email) {
 		const atPos = email.indexOf('@')
 		const dotPos = email.lastIndexOf('.')
 		try {
-			if(email.length === 0) throw new Error('Missing email.')
-			if(atPos < 1 && dotPos - atPos < 2) throw new Error('That is not the format of an email address.')
-			if(email !== email.toLowerCase()) throw new Error('Email addresses are always lower cased.')
+			if(email.length === 0) {
+				throw new Error('Missing email.')
+			}
+			if(atPos < 1 && dotPos - atPos < 2) {
+				throw new Error('That is not the format of an email address.')
+			}
+			if(email !== email.toLowerCase()) {
+				throw new Error('Email addresses are always lower cased.')
+			}
 		} catch(err) {
 			throw err
 		}
-
  	}
 
  	async passVal(pass) {
 		try {
 			if(pass.length === 0) throw new Error('Missing password.')
-			if(pass.length > 20) throw new Error('The password needs to have between 8 and 20 characters.')
-			if(pass.length < 8) throw new Error('The password needs to have between 8 and 20 characters.')
+			if(pass.length > maxLenght) throw new Error('The password needs to have between 8 and 20 characters.')
+			if(pass.length < minLenght) throw new Error('The password needs to have between 8 and 20 characters.')
 		} catch(err) {
 			throw err
 		}
