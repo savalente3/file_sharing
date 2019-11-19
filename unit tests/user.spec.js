@@ -1,23 +1,27 @@
-
 'use strict'
 
 const Accounts = require('../modules/user.js')
 
 describe('register()', () => {
 	test('register a valid account', async done => {
-		expect.assertions(1)
-		const account = await new Accounts()
-		const register = await account.register('doej', 'password')
-		expect(register).toBe(true)
-		done()
+		try {
+			expect.assertions(1)
+			const account = await new Accounts()
+			const register = await account.register('doej', 'password')
+			expect(register).toBe(true)
+		} catch(err) {
+			throw err
+		} finally {
+			done()
+		}
 	})
 
 	test('register a duplicate username', async done => {
 		expect.assertions(1)
 		const account = await new Accounts()
-		await account.register('doej', 'password')
-		await expect( account.register('doej', 'password') )
-			.rejects.toEqual( Error(''Username already in use.'') )
+		account.register('doej', 'password')
+		expect( account.register('doej', 'password') )
+			.rejects.toEqual( Error('Username already in use.'))
 		done()
 	})
 })
