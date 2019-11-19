@@ -2,28 +2,30 @@
 
 /* MODULE IMPORTS */
 const sqlite = require('sqlite-async')
+const maxLenght = 20
+const minLenght = 8
 
 module.exports = class Validator {
-    constructor(dbName = ':memory:') {
+	constructor(dbName = ':memory:') {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
-			const sql = 'CREATE TABLE IF NOT EXISTS users' +
-			'(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);'
+			const sql = `CREATE TABLE IF NOT EXISTS users
+			(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);`
 			await this.db.run(sql)
 			return this
-		})()		
-		
+		})()
+
 	}
 
  	async userVal(user) {
-        try{
+		try{
  			if (user.length === 0) throw new Error('Missing username.')
  			if (user.length >= 20) throw new Error('Username too long. Must be less than 20 characters.')
-        } catch(err) {
-            throw err
-        }
-    }
+		} catch(err) {
+			throw err
+		}
+	}
 
  	async emailVal(email) {
 		const atPos = email.indexOf('@')
@@ -41,11 +43,12 @@ module.exports = class Validator {
  	async passVal(pass) {
 		try {
 			if(pass.length === 0) throw new Error('Missing password.')
-			if(pass.length > 20) throw new Error('The password needs to have between 8 and 20 characters.')
-			if(pass.length < 8) throw new Error('The password needs to have between 8 and 20 characters.')
+			if(pass.length > maxLenght) throw new Error('The password needs to have between 8 and 20 characters.')
+			if(pass.length < minLenght) throw new Error('The password needs to have between 8 and 20 characters.')
 		} catch(err) {
 			throw err
 		}
  	}
 
- }
+}
+
