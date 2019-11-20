@@ -17,19 +17,6 @@ const User = require('../modules/user')
 const router = new Router()
 const dbName = 'website.db'
 
-/* IMPORT CUSTOM MODULES */
-
-
-/**
- * The website's home page.
- *
- * @name Home Page
- * @route {GET} /
- */
-router.get('/', async ctx => {
-	await ctx.render('homepage', {user: ctx.session.user})
-})
-
 /**
  * The user registration page.
  *

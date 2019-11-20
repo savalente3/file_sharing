@@ -11,6 +11,16 @@ const fileRoutes = require('./routs/filesRouts')
 const userRoutes = require('./routs/userRouts')
 //const jimp = require('jimp')
 
+const koaBody = require('koa-body')
+const upload = koaBody({
+	formidable: {
+		uploadDir: `${__dirname}/private/`, // directory where files will be uploaded
+		keepExtensions: true // keep file extension on upload
+	},
+	multipart: true,
+	urlencoded: true,
+})
+
 const app = new Koa()
 
 /* CONFIGURING THE MIDDLEWARE */
@@ -31,9 +41,11 @@ app.use(views(`${__dirname}/views`, {
 	}
 }))
 
+
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
 
+app.use(upload)
 app.use(fileRoutes.routes())
 app.use(userRoutes.routes())
 app.use(fileRoutes.allowedMethods())

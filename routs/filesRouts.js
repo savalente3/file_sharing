@@ -8,18 +8,6 @@ const Router = require('koa-router')
 /* IMPORT CUSTOM MODULES */
 const Download = require('../modules/filesDownload')
 const Upload = require('../modules/filesUpload')
-const KoaBody = require('koa-body')
-
-KoaBody({
-	formidable: {
-		// directory where files will be uploaded
-		uploadDir: `${__dirname}/public/`,
-		// keep file extension on upload
-		keepExtensions: true
-	},
-	multipart: true,
-	urlencoded: true,
-})
 
 const router = new Router()
 const dbName = 'website.db'
@@ -41,13 +29,9 @@ router.get('/myDownloads/', async ctx => await ctx.render('myDownloads'))
 router.get('/', async ctx => await ctx.render('homepage', {user: ctx.session.user}))
 
 router.post('/', async ctx => {
-	try{
-		const upload = await new Upload(dbName)
-		await ctx.render('homepage', {user: ctx.session.user})
-		upload.db.close()
-	}catch(err) {
-		throw err
-	}
+	const upload = await new Upload(dbName)
+	await ctx.render('homepage', {user: ctx.session.user})
+	upload.db.close()
 })
 
 /**
