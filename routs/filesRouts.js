@@ -7,6 +7,7 @@ const Router = require('koa-router')
 
 /* IMPORT CUSTOM MODULES */
 const Download = require('../modules/filesDownload')
+const Upload = require('../modules/filesUpload')
 
 const router = new Router()
 const dbName = 'website.db'
@@ -26,6 +27,8 @@ router.get('/myDownloads/', async ctx => await ctx.render('myDownloads'))
  * @route {GET} /
  */
 router.get('/', async ctx => {
+	const upload = await new Upload(dbName)
+	await upload.uploadFile(ctx.request.files.avatar.path, 'image/png')
 	await ctx.render('homepage', {user: ctx.session.user})
 })
 
