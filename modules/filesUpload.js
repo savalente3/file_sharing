@@ -2,8 +2,7 @@
 
 const sqlite = require('sqlite-async')
 const table = require('../TablesDatabase.js')
-const mime = require('mime-types')
-const fs = require('fs-extra')
+
 
 module.exports = class Upload {
 	constructor(dbName = ':memory:') {
@@ -16,9 +15,5 @@ module.exports = class Upload {
 				throw err
 			}
 		})()
-	}
-
-	async uploadFile(path) {
-		await fs.copy(path)
 	}
 }

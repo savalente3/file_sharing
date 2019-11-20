@@ -6,7 +6,7 @@ const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
 const Validator = require('./userVal')
-const table = require('../TablesDatabase.js')
+const table = require('../TablesDatabase')
 
 module.exports = class User {
 
@@ -14,7 +14,7 @@ module.exports = class User {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
 			// we need this table to store the user accounts
-			await this.db.run(table.createUserTable)
+			await this.db.run(table.createUserTable())
 			return this
 		})()
 	}

@@ -31,10 +31,8 @@ app.use(views(`${__dirname}/views`, {
 	}
 }))
 
-
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
-
 
 app.use(fileRoutes.routes())
 app.use(userRoutes.routes())
