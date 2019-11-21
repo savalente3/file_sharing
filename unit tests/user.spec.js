@@ -3,26 +3,15 @@
 const User = require('../modules/user.js')
 
 describe('register()', () => {
-	test('register a valid account', async done => {
-		expect.assertions(1)
+	test('register a valid account', async() => {
 		const account = await new User()
-		const register = await account.register('doej', 'email@gmail.com', 'password')
-		expect(register).toBe(true)
-		done()
+		expect( () => account.register('doej', 'email@gmail.com', 'password') ).toBeTruthy
 	})
 
-	test('register a duplicate username', async done => {
-		try {
-			expect.assertions(1)
-			const account = await new User()
-			await account.register('doej', 'email@gmail.com', 'password')
-			await account.register('doej', 'email2@gmail.com', 'password')
-			done.failed('test failed')
-		} catch(err) {
-			expect(err.message).toBe('Username already in use.')
-		} finally {
-			done()
-		}
+	test('register a duplicate username', async() => {
+		const account = await new User()
+		await account.register('doej', 'email@gmail.com', 'password')
+		expect( () => account.register('doej', 'email@gmail.com', 'password').toThrowError('Username already in use.'))
 	})
 })
 
@@ -32,40 +21,21 @@ describe('uploadPicture()', () => {
 })
 
 describe('login()', () => {
-	test('log in with valid credentials', async done => {
-		expect.assertions(1)
+	test('log in with valid credentials', async() => {
 		const account = await new User()
 		await account.register('doej', 'email@gmail.com', 'password')
-		const valid = await account.login('doej', 'password')
-		expect(valid).toBe(true)
-		done()
+		expect( () => account.login('doej', 'password') ).toBeTruthy
 	})
 
-	test('invalid username', async done => {
-		try {
-			expect.assertions(1)
-			const account = await new User()
-			await account.register('doej', 'email@gmail.com', 'password')
-			await account.login('roej', 'password')
-			done.failed('test failed')
-		} catch(err) {
-			expect(err.message).toBe('user "roej" not found')
-		} finally {
-			done()
-		}
+	test('invalid username', async() => {
+		const account = await new User()
+		await account.register('doej', 'email@gmail.com', 'password')
+		expect( () => account.login('roej', 'password').toThrowError('user roej not found'))
 	})
 
-	test('invalid password', async done => {
-		try {
-			expect.assertions(1)
+	test('invalid password', async() => {
 			const account = await new User()
 			await account.register('doej', 'email@gmail.com', 'password')
-			await account.login('doej', 'bad')
-			done.failed('test failed')
-		} catch(err) {
-			expect(err.message).toBe('invalid password for account "doej"')
-		} finally {
-			done()
-		}
+			expect( () => account.login('doej', 'password1').toThrowError('invalid password for account doej'))
 	})
 })

@@ -16,16 +16,12 @@ module.exports = class Download {
 		})()
 	}
 
-	async addDummy() {
+	async addDummy(downloadId, email, senderId, uploadDate) {
 		try{
 			//dummy database records
-			const sqlNew = `INSERT INTO files(receiverEmail, senderId, filePath, fileName)
-        		VALUES("toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
+			const sqlNew = `INSERT INTO files(receiverEmail, senderId, filePath, fileName, uploadDate)
+        		VALUES(${downloadId} ,${email}, ${senderId}, 'random path', 'random name', ${uploadDate})`
 			await this.db.run(sqlNew)
-
-			const sqlNew2 = `INSERT INTO files(receiverEmail, senderId, filePath, fileName)
-        		VALUES("jojojojo@gmail.com", 2, "../images/facebook.png", "Facebook Image")`
-			await this.db.run(sqlNew2)
 		} catch(err) {
 			throw err
 		}

@@ -10,12 +10,14 @@ module.exports = class Table {
         filePath TEXT,
         fileName TEXT,
         senderId INTEGER,
-        FOREIGN KEY("senderId") REFERENCES "users"("id")
-         );`
+        FOREIGN KEY("senderId") REFERENCES "users"("id"));`
 	}
 
 	static createUserTable() {
-		return `CREATE TABLE IF NOT EXISTS users
-        (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, pass TEXT);`
+		return `CREATE TABLE IF NOT EXISTS users(
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            username TEXT, 
+            email TEXT, 
+            pass TEXT);`
 	}
 }
