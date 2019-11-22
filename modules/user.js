@@ -6,6 +6,7 @@ const mime = require('mime-types')
 const sqlite = require('sqlite-async')
 const saltRounds = 10
 const Validator = require('./userVal')
+const Download = require('./filesDownload')
 
 module.exports = class User {
 
@@ -52,6 +53,7 @@ module.exports = class User {
 			const record = await this.db.get(sql)
 			const valid = await bcrypt.compare(password, record.pass)
 			if(valid === false) throw new Error(`invalid password for account "${user}"`)
+
 			return true
 		} catch(err) {
 			throw err

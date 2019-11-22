@@ -17,8 +17,11 @@
 
         <section class="homePageContainer">
             <strong>Your file '{{fileName}}' is ready to be downloaded!</strong>
-            
-            <p id="singleDownloadButton"><button><a href={{filePath}} download={{fileName}}>DOWNLOAD</a></button></p>
+
+            <p><button id= "singleDownloadButton"><a href={{filePath}} download={{fileName}}>Download!</a></button></p>
+            <form action="/downloadFile/{{id}}" method="post">                
+                <p><button id= "singleDownloadButton" type="submit">Go back to the home page and delete file.</button></p>
+            </form>
         </section>
         
         {{>footer}}
