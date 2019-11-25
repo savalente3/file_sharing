@@ -10,6 +10,7 @@ module.exports = class Table {
         filePath TEXT,
         fileName TEXT,
         senderId INTEGER,
+        uploadDate DATETIME,
         FOREIGN KEY("senderId") REFERENCES "users"("id"));`
 	}
 
