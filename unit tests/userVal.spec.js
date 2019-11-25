@@ -3,22 +3,45 @@
 const Validator = require('../modules/userVal')
 
 describe('userVal()', () => {
-	test('Missing username.', async() => {
-		const val = await new Validator()
-		await expect( () => val.userVal('').toThrowError('Missing username.') )
+	test('Missing username.', async done => {
+		try {
+			expect.assertions(1)
+			const val = await new Validator()
+			await val.userVal('')
+			done.failed('test failed')
+		} catch(err) {
+			expect(err.message).toBe('Missing username.')
+		} finally {
+			done()
+		}
 	})
 
-	test('Username too long.', async() => {
-		const val = await new Validator()
-		await expect( () => val.userVal('aaaaaaaaaaaaaaaaaaa')
-			.toThrowError('Username too long. Must be less than 20 characters.') )
+	test('Username too long.', async done => {
+		try {
+			expect.assertions(1)
+			const val = await new Validator()
+			await val.userVal('aaaaaaaaaaaaaaaaaaaaaa')
+			done.failed('test failed')
+		} catch(err) {
+			expect(err.message).toBe('Username too long. Must be less than 20 characters.')
+		} finally {
+			done()
+		}
 	})
 })
 
 describe('emailVal()', () => {
-	test('Missing email.', async() => {
-		const val = await new Validator()
-		await expect( () => val.emailVal('').toThrowError('Missing email.') )
+	test('Missing email.', async done => {
+		try {
+			expect.assertions(1)
+			const val = await new Validator()
+			await val.emailVal('')
+			done.failed('test failed')
+		} catch(err) {
+			expect(err.message).toBe('Missing email.')
+		} finally {
+			done()
+		}
 	})
 
 	test('Wrong email format.', async() => {

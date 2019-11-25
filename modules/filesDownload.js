@@ -19,8 +19,8 @@ module.exports = class Download {
 	async addDummy(downloadId, email, senderId, uploadDate) {
 		try{
 			//dummy database records
-			const sqlNew = `INSERT INTO files(receiverEmail, senderId, filePath, fileName, uploadDate)
-        		VALUES(${downloadId} ,${email}, ${senderId}, 'random path', 'random name', ${uploadDate})`
+			const sqlNew = `INSERT INTO files(downloadId, receiverEmail, senderId, filePath, fileName, uploadDate)
+        		VALUES(${downloadId}, ${email}, ${senderId}, 'random path', 'random name', ${uploadDate})`
 			await this.db.run(sqlNew)
 		} catch(err) {
 			throw err
