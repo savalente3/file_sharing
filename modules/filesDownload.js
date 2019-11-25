@@ -18,7 +18,6 @@ module.exports = class Download {
 
 	async addDummy() {
 		try{
-			//dummy database records
 			const sqlNew = `INSERT INTO files( receiverEmail, filePath, fileName, senderId, uploadDate)
         		VALUES("email@gmail.com", '../images/instagram.png', "name", 1, date("now"))`
 			await this.db.run(sqlNew)
