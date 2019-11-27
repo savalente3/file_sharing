@@ -37,9 +37,6 @@ module.exports = class Validator {
 			if(atPos < 1 && dotPos - atPos < 2) {
 				throw new Error('That is not the format of an email address.')
 			}
-			if(email !== email.toLowerCase()) {
-				throw new Error('Email addresses are always lower cased.')
-			}
 		} catch(err) {
 			throw err
 		}
