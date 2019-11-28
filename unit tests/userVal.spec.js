@@ -49,7 +49,7 @@ describe('emailVal()', () => {
 		await expect( () => val.emailVal('email.com').toThrowError('That is not the format of an email address.') )
 	})
 
-	test('Email is not lower cased.', async() =>{
+	test('Email is not lower cased.', async() => {
 		const val = await new Validator()
 		await expect( () => val.emailVal('GMAIL@GMAIL.COM').toThrowError('Email addresses are always lower cased.'))
 	})

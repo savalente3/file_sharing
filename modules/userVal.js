@@ -5,6 +5,7 @@ const table = require('../TablesDatabase.js')
 const sqlite = require('sqlite-async')
 const maxLenght = 20
 const minLenght = 8
+const atPosition = 2
 
 module.exports = class Validator {
 	constructor(dbName = ':memory:') {
@@ -34,7 +35,7 @@ module.exports = class Validator {
 			if(email.length === 0) {
 				throw new Error('Missing email.')
 			}
-			if(atPos < 1 && dotPos - atPos < 2) {
+			if(atPos < 1 && dotPos - atPos < atPosition) {
 				throw new Error('That is not the format of an email address.')
 			}
 			if(email !== email.toLowerCase()) {
