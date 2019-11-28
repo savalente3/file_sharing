@@ -17,19 +17,6 @@ const User = require('../modules/user')
 const router = new Router()
 const dbName = 'website.db'
 
-/* IMPORT CUSTOM MODULES */
-
-
-/**
- * The website's home page.
- *
- * @name Home Page
- * @route {GET} /
- */
-router.get('/', async ctx => {
-	await ctx.render('homepage', {user: ctx.session.user})
-})
-
 /**
  * The user registration page.
  *
@@ -84,7 +71,9 @@ router.post('/register', koaBody, async ctx => {
  * @name About Page
  * @route {GET} /about
  */
-router.get('/about', async ctx => await ctx.render('about'))
+router.get('/about/', async ctx => await ctx.render('about', {
+	user: ctx.session.user
+}))
 
 /**
  * The script to process users login.
@@ -97,7 +86,7 @@ router.get('/login', async ctx => {
 	if (ctx.query.msg) data.msg = ctx.query.msg
 	if (ctx.query.user) data.user = ctx.query.user
 
-	console.log(data)
+	console.log(data.user)
 	await ctx.render('login', data)
 
 	try{
@@ -119,14 +108,18 @@ router.get('/login', async ctx => {
  * @name Login Script
  * @route {POST} /login
  */
+// eslint-disable-next-line max-lines-per-function
 router.post('/login', async ctx => {
 	try {
 		const body = ctx.request.body
 		const user = await new User(dbName)
 		await user.login(body.user, body.pass)
-		ctx.session.authorised = true
-		ctx.session.user = body.user
-		return ctx.redirect('/?msg=you are now logged in...')
+		const userCkeck = await user.login(body.user, body.pass)
+		if (userCkeck) {
+			ctx.session.authorised = true
+			ctx.session.user = body.user
+			return ctx.redirect('/?msg=you are now logged in...')
+		}
 	} catch (err) {
 		await ctx.render('error', {
 			message: err.message
@@ -145,5 +138,6 @@ router.get('/logout', async ctx => {
 	ctx.session.user = null
 	ctx.redirect('/?msg=you are now logged out')
 })
+
 
 module.exports = router

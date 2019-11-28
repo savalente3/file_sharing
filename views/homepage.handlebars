@@ -16,28 +16,56 @@
 <body class="container">
 	{{>navbar}}
 
-	<article class="homePageContainer">
-		<form action="post">
-			<h2>Send your files to your Friends</h2>
-			<input type="text" name="user" value="email@email.com or username">
-		</form>
 
-		<form method="post" action="" enctype="multipart/form-data">
+	<script>
+		// pop on click to let the user know the file has been uploaded
+		function myFunction() {
+			const popup = document.getElementById("myPopup");
+			popup.classList.toggle("show");
+		}
+	</script>
+
+	<article class="homePageContainer">
+		<form method="post" action="/upload" enctype="multipart/form-data">
+			<h2>Send your files to your Friends</h2>
+
+			{{#if user}}
+				<input type="text" placeholder="email@email.com or username" name="emailOrUsername">
+			{{else}}
+				<input type="text" placeholder="email@email.com or username" name="emailOrUsername" disabled>
+			{{/if}}
+
+			<br>
 			<h3>Search for file</h3>
-			<input class="box__file" type="file" name="files[]" data-multiple-caption="{count} files selected"
-				multiple />
-			<div class="box__input box">
-				<br>
+
+			{{#if user}}
+				<input class="box__file" type="file" name="file" data-multiple-caption="{count} files selected" multiple />
+			{{else}}
+				<input class="box__file" type="file" name="file" data-multiple-caption="{count} files selected" multiple disabled />
+			{{/if}}
+			
+			<section class="box__input box">
 				<label for="file">
-					<span class="box__dragndrop">
-						Drag And Drop Here
-					</span>
+					<object class="box__dragndrop">
+						<br>
+						<p>Drag And Drop Here</p>
+					</object>
 				</label>
 				<br>
-			</div>
+			</section>
+
+			{{#if user}}
+			<button class="box__button popup" onclick="myFunction()" id="registerButton" type="submit">Upload
+				<section class="popuptext" id="myPopup">Done!</section>
+			</button>
+			{{else}}
+			<button class="box__button popup" onclick="myFunction()" id="registerButton2" type="submit" disabled>Upload
+				<section class="popuptext" id="myPopup">Done!</section>
+			</button>
 			<br>
-			<button class="box__button" id="registerButton" type="submit">Upload</button>
-			
+			{{/if}}
+
+
 			<div class="box__uploading">Uploading&hellip;</div>
 			<div class="box__success">Done!</div>
 			<div class="box__error">Error! <span></span>.</div>
@@ -51,7 +79,6 @@
 	</article>
 
 	{{>footer}}
-
 </body>
 
 </html>

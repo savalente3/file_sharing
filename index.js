@@ -11,11 +11,14 @@ const fileRoutes = require('./routs/filesRouts')
 const userRoutes = require('./routs/userRouts')
 //const jimp = require('jimp')
 
+const koaBody = require('koa-body')
+
 const app = new Koa()
 
 /* CONFIGURING THE MIDDLEWARE */
 app.keys = ['darkSecret']
 app.use(staticDir('public'))
+app.use(koaBody())
 app.use(bodyParser())
 app.use(session(app))
 app.use(views(`${__dirname}/views`, {
@@ -34,7 +37,6 @@ app.use(views(`${__dirname}/views`, {
 
 const defaultPort = 8080
 const port = process.env.PORT || defaultPort
-
 
 app.use(fileRoutes.routes())
 app.use(userRoutes.routes())

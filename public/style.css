@@ -18,45 +18,97 @@
 *
 */
 
-form > h3{
-text-align: left;
-padding-left: 12%;
-margin: 0;
-}
+ /* Popup in upload button*/
+ .popup {
+   position: relative;
+   display: inline-block;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+ }
+
+ /* The actual popup */
+ .popup .popuptext {
+   visibility: hidden;
+   width: 160px;
+   background-color: gray;
+   color: #fff;
+   text-align: center;
+   border-radius: 6px;
+   padding: 8px 0;
+   position: absolute;
+   z-index: 1;
+   bottom: 125%;
+   left: 50%;
+   margin-left: -80px;
+ }
+
+ /* Popup arrow */
+ .popup .popuptext::after {
+   content: "";
+   position: absolute;
+   top: 100%;
+   left: 50%;
+   margin-left: -5px;
+   border-width: 5px;
+   border-style: solid;
+   border-color: gray;
+ }
+
+ .popup .show {
+   visibility: visible;
+   -webkit-animation-duration: 50s;
+   animation-duration: 50s;
+ }
+
+ .box__dragndrop>p:hover {
+   color: darkgrey;
+ }
+
+ form>h3 {
+   text-align: left;
+   padding-left: 12%;
+   margin: 0;
+ }
 
  .homePageContainer {
-  background-color: darkgrey;
-  border-radius: 15px;
-  padding: auto;
-  margin: auto 20px auto 100px;
-  text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.marginRight{
-  align-content: center;
-  margin: auto 100px auto 20px !important;
-}
-
-.box{
-  font-size: 1.25rem; /* 20 */
-  background-color: #426A5A;
-  opacity: 0.7;
-  margin: 5%;
-  padding: 100px 20px;
-  border-radius: 25px;
+   background-color: darkgrey;
+   border-radius: 15px;
+   padding: auto;
+   margin: auto 20px auto 100px;
+   text-align: center;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
  }
 
-.box__uploading,
-.box__success,
-.box__error {
-  display: none;
-}
-
-iframe{
-  margin-top: 8%; 
-  margin-bottom: 8%;
+ .marginRight {
+   align-content: center;
+   margin: auto 100px auto 20px !important;
  }
+
+ .box {
+   font-size: 1.25rem;
+   /* 20 */
+   background-color: #426A5A;
+   opacity: 0.7;
+   margin: 5%;
+   margin-bottom: 0%;
+   padding: 100px 20px;
+   border-radius: 25px;
+ }
+
+ .box__uploading,
+ .box__success,
+ .box__error {
+   display: none;
+ }
+
+ iframe {
+   margin-top: 8%;
+   margin-bottom: 8%;
+ }
+
  /*
 * 
 *  Download page css code
@@ -69,53 +121,24 @@ iframe{
    top: 2%;
  }
 
- article.previewBox {
-   background-color: lightgrey;
-   text-align: center;
-   margin-top: 10%;
-   padding-top: 3%;
+ .boxSize {
+   height: 200px !important;
+   margin-bottom: 0% !important;
+ }
+
+ .infoBox {
+   background-color: lightgray;
+   opacity: 0.7;
+   margin: 5%;
+   margin-top: 5px !important;
    border-radius: 25px;
-   position: relative;
-   top: 30%;
-   padding: 10%;
+   height: 100px !important;
  }
 
- aside.fileBox {
-   text-align: center;
-   background-color: gray;
-   margin-top: 8%;
-   padding-top: 3%;
-   border-radius: 25px;
+ .marginRight>.box {
+   background-color: lightgray;
+   opacity: 1 !important;
  }
-
-
- object.previewBox {
-   width: 75%;
-   margin-left: auto;
-   margin-right: auto;
-   padding: 30%;
- }
-
- iframe.fileList {
-   grid-auto-rows: 3px;
-   background-color: aquamarine;
-   height: 250px;
-   width: 75%;
- }
-
-
- /* button {
-   transition-duration: 0.3s;
-   border-radius: 5px;
-   font-size: 30px;
-   font-style: normal;
- }
-
- button:hover {
-   background-color: rgba(121, 241, 250, 0.452);
-   color: white;
-   box-shadow: 0 0 0 1px aquamarine;
- } */
 
 
  /*
@@ -123,6 +146,11 @@ iframe{
 *  About page css code
 *
 */
+
+#AboutTeam,
+#AboutProject{
+  margin-top: 10%;
+}
  #dtmember1 {
    color: black;
  }
@@ -139,8 +167,10 @@ iframe{
 
  }
 
- form > #registerButton, 
- .greyContainer > #registerButton{
+ form>#registerButton,
+ .greyContainer>#registerButton,
+ .marginRight>#registerButton,
+ form>#registerButton2 {
    margin-bottom: 20px !important;
  }
 
@@ -234,7 +264,7 @@ iframe{
    background-color: #f9f9f9;
    min-width: 160px;
    box-shadow: 20px 8px 16px 0px rgba(0, 0, 0, 0.2);
-   z-index: 1;
+   z-index: 5 !important;
  }
 
  .dropdown-content a {
@@ -243,10 +273,13 @@ iframe{
    text-decoration: none;
    display: block;
    text-align: center;
+   z-index: 5 !important;
+
  }
 
  .dropdown:hover .dropdown-content {
    display: block;
+   z-index: 5 !important;
  }
 
  /*
@@ -294,7 +327,8 @@ iframe{
    display: inline-grid;
    grid-template-columns: auto auto;
  }
-/*
+
+ /*
 *
 * log in css code
 *
@@ -316,7 +350,10 @@ iframe{
  }
 
  #registerButton,
- #registerButton>a {
+ #registerButton>a,
+ #registerButton2>a,
+ #registerButton2, 
+ #registerButton3 {
    background-color: #426A5A;
    text-decoration: none !important;
    padding: 7%;
@@ -329,8 +366,7 @@ iframe{
    margin-top: 10px;
  }
 
- #registerButton:hover
-{
+ #registerButton:hover {
    background-color: #426A5A;
    opacity: 0.5;
  }
@@ -349,3 +385,32 @@ iframe{
    padding-left: 70px;
    margin-top: 5px;
  }
+
+  /*
+*
+*  downloadFile page css code
+*
+*/
+.container > img{
+  margin: 0 auto 0 auto;
+  border-radius: 25px;
+  position: relative;
+  top: 30%;
+}
+
+.position{
+  padding: 5%;
+}
+
+  /*
+*
+*  Error page css code
+*
+*/
+
+#registerButton3,
+#registerButton3 > a{
+    min-width: 30px;
+    text-decoration: none;
+    color: white;
+}

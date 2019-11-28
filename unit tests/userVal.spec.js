@@ -44,6 +44,7 @@ describe('emailVal()', () => {
 		}
 	})
 
+<<<<<<< HEAD
 	test('Wrong email format.', async done => {
 		try {
 			expect.assertions(1)
@@ -55,6 +56,16 @@ describe('emailVal()', () => {
 		} finally {
 			done()
 		}
+=======
+	test('Wrong email format.', async() => {
+		const val = await new Validator()
+		await expect( () => val.emailVal('email.com').toThrowError('That is not the format of an email address.') )
+	})
+
+	test('Email is not lower cased.', async() => {
+		const val = await new Validator()
+		await expect( () => val.emailVal('GMAIL@GMAIL.COM').toThrowError('Email addresses are always lower cased.'))
+>>>>>>> 4179274fc337c5e5b0d5fb019621aac859277119
 	})
 })
 
@@ -85,6 +96,7 @@ describe('passVal()', () => {
 		}
 	})
 
+<<<<<<< HEAD
 	test('Password too long.', async done => {
 		try {
 			expect.assertions(1)
@@ -96,5 +108,11 @@ describe('passVal()', () => {
 		} finally {
 			done()
 		}
+=======
+	test('Password too long.', async() => {
+		const val = await new Validator()
+		await expect( () => val.passVal('123456789123456789123456789')
+			.toThrowError('The password needs to have between 8 and 20 characters.'))
+>>>>>>> 4179274fc337c5e5b0d5fb019621aac859277119
 	})
 })
