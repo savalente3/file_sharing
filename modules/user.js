@@ -8,6 +8,7 @@ const saltRounds = 10
 const Validator = require('./userVal')
 const table = require('../TablesDatabase')
 
+
 module.exports = class User {
 
 	constructor(dbName = ':memory:') {
@@ -18,21 +19,6 @@ module.exports = class User {
 			return this
 		})()
 	}
-
-
-	// async getUserInfo(user) {
-	// 	try {
-	// 		const sql = `SELECT * FROM users WHERE username="${user}";`
-	// 		const records = await this.db.get(sql)
-	// 		console.log(records)
-	// 		if(records.count !== 0) throw new Error('Username already in use.')
-	// 		const run = await this.db.run(sql)
-	// 		console.log(run)
-	// 		return run
-	// 	} catch(err) {
-	// 		throw err
-	// 	}
-	// }
 
 	async register(user, email, pass) {
 		try {
@@ -66,6 +52,7 @@ module.exports = class User {
 			const record = await this.db.get(sql)
 			const valid = await bcrypt.compare(password, record.pass)
 			if(valid === false) throw new Error(`invalid password for account "${user}"`)
+
 			return true
 		} catch(err) {
 			throw err

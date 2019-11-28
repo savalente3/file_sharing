@@ -13,12 +13,34 @@
 </head>
 
 <body class="container">
-        {{>navbar}}
+         <header>
+     <nav>
+         <ul class="navformating">
+             <li class="floatRightNav"> <a href="#"> About Us</a></li>
+             <li class="dropdown floatRightNav">
 
-        <section class="homePageContainer position">
-            <h1>Your file {{fileName}} is ready to be downloaded!</h1>
+            {{!--check if there is user in session and changes the log in to the user name--}}
+             {{#if user}}
+		        <a href="javascript:void(0)" class="dropbtn">Hello, {{user}} </a>
+             {{else}}
+                <a href="javascript:void(0)" class="dropbtn">Hello</a>
+             {{/if}}
+             
+             <li class="floatRightNav">  <img src="../../images/alarm.png" width="25" alt=""></li>        
+             <li class="logo"><a href='#'> <img src="../../images/logo.png" width="60" alt=""></a></li>
+
+         </ul>
+ </nav>
+ </header>
+
+        <section class="homePageContainer">
             <br>
-            <button id="registerButton"><a href={{filePath}} download={{fileName}}>DOWNLOAD</a></button>
+            <strong>Your file '{{fileName}}' is ready to be downloaded!</strong>
+
+            <p><button id= "registerButton"><a href={{filePath}} download={{fileName}}>Download!</a></button></p>
+            <form action="/downloadFile/{{id}}" method="post">                
+                <p><button id= "registerButton" type="submit">Go back</button></p>
+            </form>
         </section>
         <img src="/images/giphy.gif" alt="excited person">
         

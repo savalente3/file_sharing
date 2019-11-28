@@ -18,14 +18,9 @@ module.exports = class Download {
 
 	async addDummy() {
 		try{
-			//dummy database records
-			const sqlNew = `INSERT INTO files(receiver, senderId, filePath, fileName)
-        		VALUES("toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
+			const sqlNew = `INSERT INTO files( receiverEmail, filePath, fileName, senderId, uploadDate)
+        		VALUES("email@gmail.com", '../images/instagram.png', "name", 1, date("now"))`
 			await this.db.run(sqlNew)
-
-			const sqlNew2 = `INSERT INTO files(receiver, senderId, filePath, fileName)
-        		VALUES("jojojojo@gmail.com", 2, "../images/facebook.png", "Facebook Image")`
-			await this.db.run(sqlNew2)
 		} catch(err) {
 			throw err
 		}
@@ -33,8 +28,11 @@ module.exports = class Download {
 
 	async download(downloadId) {
 		try {
-			const sql = `SELECT filePath FROM files WHERE downloadId = ${downloadId}`
-			const filePath = await this.db.get(sql)
+			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}";`
+			const records = await this.db.get(sql)
+			if(records === 0) throw new Error('Inexistent file.')
+			const sql2 = `SELECT filePath FROM files WHERE downloadId = ${downloadId}`
+			const filePath = await this.db.get(sql2)
 			return filePath
 		} catch(err) {
 			throw err
@@ -43,19 +41,21 @@ module.exports = class Download {
 
 	async getName(downloadId) {
 		try {
-			const sql = `SELECT fileName FROM files WHERE downloadId = ${downloadId}`
-			const fileName = await this.db.get(sql)
+			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}";`
+			const records = await this.db.get(sql)
+			if(records === 0) throw new Error('Inexistent file.')
+			const sql2 = `SELECT fileName FROM files WHERE downloadId = ${downloadId}`
+			const fileName = await this.db.get(sql2)
 			return fileName
 		} catch(err) {
 			throw err
 		}
 	}
 
-	async getUsername(user) {
+	async deleteFile(downloadId) {
 		try {
-			const sql = `SELECT count(id) AS count FROM users WHERE username = "${user}";`
-			const username = await this.db.get(sql)
-			return username
+			const sql2 = `DELETE FROM files WHERE downloadId = ${downloadId}`
+			await this.db.run(sql2)
 		} catch(err) {
 			throw err
 		}
