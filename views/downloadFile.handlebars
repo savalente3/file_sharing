@@ -15,11 +15,12 @@
 <body class="container">
         {{>navbar}}
 
-        <section class="homePageContainer">
-            <strong>Your file '{{fileName}}' is ready to be downloaded!</strong>
-            
-            <p id="singleDownloadButton"><button><a href={{filePath}} download={{fileName}}>DOWNLOAD</a></button></p>
+        <section class="homePageContainer position">
+            <h1>Your file {{fileName}} is ready to be downloaded!</h1>
+            <br>
+            <button id="registerButton"><a href={{filePath}} download={{fileName}}>DOWNLOAD</a></button>
         </section>
+        <img src="/images/giphy.gif" alt="excited person">
         
         {{>footer}}
 </body>

@@ -7,7 +7,7 @@ describe('userVal()', () => {
 	test('Missing username.', async done => {
 		try {
 			expect.assertions(1)
-			val.userVal('')
+			await val.userVal('')
 			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('Missing username.')
@@ -19,7 +19,7 @@ describe('userVal()', () => {
 	test('Username too long.', async done => {
 		try {
 			expect.assertions(1)
-			val.userVal('aaaaaaaaaaaaaaaaaaaa')
+			await val.userVal('aaaaaaaaaaaaaaaaaaaa')
 			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('Username too long. Must be less than 20 characters.')
@@ -33,7 +33,7 @@ describe('emailVal()', () => {
 	test('Missing email.', async done => {
 		try {
 			expect.assertions(1)
-			val.emailVal('')
+			await val.emailVal('')
 			done.fail('test failed')
 
 		} catch(err) {
@@ -46,7 +46,7 @@ describe('emailVal()', () => {
 	test('Wrong format email.', async done => {
 		try {
 			expect.assertions(1)
-			val.emailVal('greatemail.com')
+			await val.emailVal('greatemail.com')
 			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('That is not the format of an email address.')
@@ -58,7 +58,7 @@ describe('emailVal()', () => {
 	test('Email is not lower cased.', async done =>{
 		try {
 			expect.assertions(1)
-			val.emailVal('GOODEMAIL@GMAIL.COM')
+			await val.emailVal('GOODEMAIL@GMAIL.COM')
 			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('Email addresses are always lower cased.')
@@ -72,7 +72,7 @@ describe('passVal()', () => {
 	test('Missing password.', async done => {
 		try {
 			expect.assertions(1)
-			val.passVal('')
+			await val.passVal('')
 			done.fail('test failed')
 
 		} catch(err) {
@@ -85,7 +85,7 @@ describe('passVal()', () => {
 	test('Password too short.', async done => {
 		try {
 			expect.assertions(1)
-			val.passVal('1')
+			await val.passVal('1')
 			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('The password needs to have between 8 and 20 characters.')
@@ -97,7 +97,7 @@ describe('passVal()', () => {
 	test('Password too long.', async done => {
 		try {
 			expect.assertions(1)
-			val.passVal('111111111111111111111')
+			await val.passVal('111111111111111111111')
 			done.fail('test failed')
 		} catch(err) {
 			expect(err.message).toBe('The password needs to have between 8 and 20 characters.')

@@ -40,6 +40,7 @@
     "markdownlint-cli": "^0.18.0",
     "mddir": "^1.1.1",
     "mime-types": "^2.1.22",
+    "mock-fs": "^4.10.3",
     "nodemon": "^1.19.4",
     "remark-cli": "^7.0.0",
     "remark-lint": "^6.0.5",

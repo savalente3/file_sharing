@@ -19,11 +19,11 @@ module.exports = class Download {
 	async addDummy() {
 		try{
 			//dummy database records
-			const sqlNew = `INSERT INTO files(receiverEmail, senderId, filePath, fileName)
+			const sqlNew = `INSERT INTO files(receiver, senderId, filePath, fileName)
         		VALUES("toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
 			await this.db.run(sqlNew)
 
-			const sqlNew2 = `INSERT INTO files(receiverEmail, senderId, filePath, fileName)
+			const sqlNew2 = `INSERT INTO files(receiver, senderId, filePath, fileName)
         		VALUES("jojojojo@gmail.com", 2, "../images/facebook.png", "Facebook Image")`
 			await this.db.run(sqlNew2)
 		} catch(err) {
@@ -46,6 +46,16 @@ module.exports = class Download {
 			const sql = `SELECT fileName FROM files WHERE downloadId = ${downloadId}`
 			const fileName = await this.db.get(sql)
 			return fileName
+		} catch(err) {
+			throw err
+		}
+	}
+
+	async getUsername(user) {
+		try {
+			const sql = `SELECT count(id) AS count FROM users WHERE username = "${user}";`
+			const username = await this.db.get(sql)
+			return username
 		} catch(err) {
 			throw err
 		}
