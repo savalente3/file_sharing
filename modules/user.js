@@ -30,7 +30,8 @@ module.exports = class User {
 			let sql = `SELECT count(id) AS count FROM users WHERE username="${user}";`
 			const records = await this.db.get(sql)
 			if(records.count !== 0) throw new Error('Username already in use.')
-			sql = `INSERT INTO users(username, email, pass) VALUES("${user}", "${email}", "${pass}")`
+			const lowerEmail = email.toLowerCase()
+			sql = `INSERT INTO users(username, email, pass) VALUES("${user}", "${lowerEmail}", "${pass}")`
 			await this.db.run(sql)
 			return true
 		} catch(err) {
