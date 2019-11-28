@@ -8,7 +8,6 @@ const saltRounds = 10
 const Validator = require('./userVal')
 const table = require('../TablesDatabase')
 
-
 module.exports = class User {
 
 	constructor(dbName = ':memory:') {
