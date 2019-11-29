@@ -23,7 +23,6 @@ BeforeAll(async function() {
 
 //Since it was opened now it needs to be closed after the tests are complete
 AfterAll(function() {
-	server.close()
 	browser.close()
 })
 
