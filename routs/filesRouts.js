@@ -64,11 +64,11 @@ router.post('/upload', koaBody, async ctx => {
 		//RegEx Simple Check - anystring@anystring.anystring
 		const isEmailInput = /\S+@\S+\.\S+/
 		await upload.getSenderEmailWithUsername(ctx.session.user)
-
-		if (isEmailInput.test(ctx.request.body.email)) {
-			await upload.sendFileWithReceiverEmail(body.emailOrUsername, file.path, file.type, file.name)
+		if (isEmailInput.test(ctx.request.body.emailOrUsername)) {
+			await upload.uploadFiles(file.path, file.type, file.name)
+			await upload.sendFileWithReceiverEmail(body.emailOrUsername)
 		}else {
-			await upload.sendFileWithReceiverEmail(body.emailOrUsername, file.path, file.type, file.name)
+			await upload.uploadFiles(file.path, file.type, file.name)
 			await upload.sendFileWithReceiverUsername(body.emailOrUsername)
 		}
 		ctx.redirect(`/?msg=new user "${file.name}" uploaded`)

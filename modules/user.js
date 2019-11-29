@@ -19,21 +19,6 @@ module.exports = class User {
 		})()
 	}
 
-
-	// async getUserInfo(user) {
-	// 	try {
-	// 		const sql = `SELECT * FROM users WHERE username="${user}";`
-	// 		const records = await this.db.get(sql)
-	// 		console.log(records)
-	// 		if(records.count !== 0) throw new Error('Username already in use.')
-	// 		const run = await this.db.run(sql)
-	// 		console.log(run)
-	// 		return run
-	// 	} catch(err) {
-	// 		throw err
-	// 	}
-	// }
-
 	async register(user, email, pass) {
 		try {
 			const valid = await new Validator()

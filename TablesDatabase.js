@@ -14,6 +14,7 @@ module.exports = class Table {
         downloadId INTEGER PRIMARY KEY AUTOINCREMENT,
         filePath TEXT,
         fileName TEXT,
+        uploadDate TEXT,
         senderEmail TEXT,
         receiverEmail,
         FOREIGN KEY(senderEmail) REFERENCES users(username)
