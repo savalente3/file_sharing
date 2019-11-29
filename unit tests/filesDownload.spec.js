@@ -1,100 +1,53 @@
 'use strict'
 
-const Validator = require('../modules/userVal')
+const Download = require('../modules/filesDownload')
 
-describe('userVal()', () => {
-	test('Missing username.', async done => {
-		try {
-			expect.assertions(1)
-			const val = await new Validator()
-			await val.userVal('')
-			done.failed('test failed')
+describe('download()', () => {
+	test('File does not exist in the database. (on download)', async done => {
+		try{
+			const file = await new Download()
+			await file.addDummy(123)
+			await file.download(124)
 		} catch(err) {
-			expect(err.message).toBe('Missing username.')
-		} finally {
-			done()
-		}
-	})
-
-	test('Username too long.', async done => {
-		try {
-			expect.assertions(1)
-			const val = await new Validator()
-			await val.userVal('aaaaaaaaaaaaaaaaaaaaaa')
-			done.failed('test failed')
-		} catch(err) {
-			expect(err.message).toBe('Username too long. Must be less than 20 characters.')
+			expect(err.message).toBe('Inexistent file.')
 		} finally {
 			done()
 		}
 	})
 })
 
-describe('emailVal()', () => {
-	test('Missing email.', async done => {
-		try {
-			expect.assertions(1)
-			const val = await new Validator()
-			await val.emailVal('')
-			done.failed('test failed')
+describe('getName()', () => {
+	test('File does not exist in the database. (on get name)', async done => {
+		try{
+			const file = await new Download()
+			await file.addDummy(124)
+			await file.getName(125)	
 		} catch(err) {
-			expect(err.message).toBe('Missing email.')
-		} finally {
-			done()
-		}
-	})
-
-	test('Wrong email format.', async done => {
-		try {
-			expect.assertions(1)
-			const val = await new Validator()
-			await val.emailVal('notanemail')
-			done.failed('test failed')
-		} catch(err) {
-			expect(err.message).toBe('That is not the format of an email address.')
+			expect(err.message).toBe('Inexistent file.')
 		} finally {
 			done()
 		}
 	})
 })
 
-describe('passVal()', () => {
-	test('Missing password.', async done => {
+describe('delete()', () => {
+	test('File is being deleted.', async done => {
 		try {
-			expect.assertions(1)
-			const val = await new Validator()
-			await val.passVal('')
-			done.failed('test failed')
+			const file = await new Download()
+			await file.addDummy(125)
+			await file.deleteFile(125)
+			await file.download(125)
 		} catch(err) {
-			expect(err.message).toBe('Missing password.')
+			expect(err.message).toBe('Inexistent file.')
 		} finally {
 			done()
 		}
 	})
+})
 
-	test('Password too short.', async done => {
-		try {
-			expect.assertions(1)
-			const val = await new Validator()
-			await val.passVal('12')
-			done.failed('test failed')
-		} catch(err) {
-			expect(err.message).toBe('The password needs to have between 8 and 20 characters.')
-		} finally {
-			done()
-		}
-	})
-
-	test('Password too long.', async done => {
-		try {
-			expect.assertions(1)
-			const val = await new Validator()
-			await val.passVal('123456789123456789123456789')
-			done.failed('test failed')
-		} catch(err) {
-			expect(err.message).toBe('The password needs to have between 8 and 20 characters.')
-		} finally {
-			done()
-		}
+describe('addDummy()', () => {
+	test('Dummy created successfully.', async() => {
+		const file = await new Download()
+		expect(await file.addDummy(126)).toEqual(true)
 	})
 })

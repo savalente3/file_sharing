@@ -4,10 +4,7 @@
 
 /* MODULE IMPORTS */
 const Router = require('koa-router')
-const koaBody = require('koa-body')({
-	multipart: true,
-	uploadDir: '.'
-})
+const koaBody = require('koa-body')
 
 /* IMPORT CUSTOM MODULES */
 const Download = require('../modules/filesDownload')
@@ -26,7 +23,7 @@ router.get('/myDownloads/', async ctx => {
 	try {
 		if (ctx.session.authorised === null) {
 			ctx.redirect('/?msg=page only available when logged in')
-		}else{
+		} else {
 			await ctx.render('myDownloads', {
 				user: ctx.session.user
 			})
@@ -46,7 +43,9 @@ router.get('/myDownloads/', async ctx => {
  */
 router.get('/', async ctx => {
 	console.log(ctx.session.user)
-	await ctx.render('homepage', {user: ctx.session.user})
+	await ctx.render('homepage', {
+		user: ctx.session.user
+	})
 })
 
 /**
@@ -61,7 +60,6 @@ router.post('/upload', koaBody, async ctx => {
 		const upload = await new Upload(dbName)
 		const body = ctx.request.body
 		const file = ctx.request.files.file
-		//RegEx Simple Check - anystring@anystring.anystring
 		const isEmailInput = /\S+@\S+\.\S+/
 		await upload.getSenderEmailWithUsername(ctx.session.user)
 		if (isEmailInput.test(ctx.request.body.emailOrUsername)) {
@@ -75,9 +73,7 @@ router.post('/upload', koaBody, async ctx => {
 		upload.db.close()
 	} catch (err) {
 		console.log(err)
-		await ctx.render('error', {
-			message: err.message
-		})
+		await ctx.render('error', {message: err.message})
 	}
 })
 
@@ -89,18 +85,34 @@ router.post('/upload', koaBody, async ctx => {
  */
 router.get('/downloadFile/:downloadId', async ctx => {
 	const fileSender = await new Download(dbName)
-	await fileSender.addDummy()
-	const download = await fileSender.download(ctx.params.downloadId)
-	console.log(ctx.params.downloadId)
+	const filePath = await fileSender.download(ctx.params.downloadId)
 	const downloadName = await fileSender.getName(ctx.params.downloadId)
-	await ctx.render('downloadFile', {
-		filePath: download.filePath,
-		fileName: downloadName.fileName
-	})
 	if (ctx.session.authorised === true) {
 		await ctx.render('downloadFile', {
-			user: ctx.session.user
+			user: ctx.session.user,
+			id: ctx.params.downloadId,
+			filePath: filePath.filePath,
+			fileName: downloadName.fileName
 		})
+	} else {
+		await ctx.render('downloadFile')
+	}
+})
+
+/**
+ * The single download page.
+ *
+ * @name FileDownload Page
+ * @route {POST} /downloadFile
+ */
+router.post('/downloadFile/:downloadId', async ctx => {
+	try {
+		const fileSender = await new Download(dbName)
+
+		await fileSender.deleteFile(ctx.params.downloadId)
+		await ctx.redirect('/?msg=File downloaded and deleted successfully!')
+	} catch (err) {
+		console.log(err)
 	}
 })
 
