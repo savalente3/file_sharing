@@ -23,6 +23,7 @@ module.exports = class Download {
 			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName)
         		VALUES("date('now')","toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
 			await this.db.run(sqlNew)
+			return true
 		} catch(err) {
 			throw err
 		}

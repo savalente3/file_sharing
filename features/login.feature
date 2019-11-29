@@ -8,11 +8,11 @@ Feature: User login.
 		Then I should be redirected to the homepage with a message assuring I was logged in
 
 	Scenario: User provides incorrect password
-		Given username is 'human' and the password 'avocado12'
-		When I try to log in
+		Given username is 'human' and the wrong password 'avocado13'
+		When I try to log in with wrong password
 		Then I should be asked to try again with an error telling me the password was incorrect
     
 	Scenario: User provides unregistered username
-		Given username is 'human' and the password 'avocado12'
-		When I try to log in
+		Given wrong username is 'alien' and the password 'avocado12'
+		When I try to log in with wrong username
 		Then I should be asked to try again with an error telling me the username doesn't exist
