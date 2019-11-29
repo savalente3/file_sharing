@@ -20,8 +20,10 @@ module.exports = class Download {
 	async addDummy() {
 		try{
 			//dummy database records
+			console.log(Date().toString())
+			const date = Date().toString()
 			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName)
-        		VALUES("date('now')","toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
+        		VALUES("${date}","Mariaze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
 			await this.db.run(sqlNew)
 		} catch(err) {
 			throw err
