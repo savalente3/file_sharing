@@ -6,13 +6,9 @@ const table = require('../TablesDatabase.js')
 module.exports = class Download {
 	constructor(dbName = ':memory:') {
 		return (async() => {
-			try{
-				this.db = await sqlite.open(dbName)
-				await this.db.run(table.createFileTable())
-		  	return this
-			} catch(err) {
-				throw err
-			}
+			this.db = await sqlite.open(dbName)
+			await this.db.run(table.createFileTable())
+			return this
 		})()
 	}
 
@@ -20,7 +16,6 @@ module.exports = class Download {
 	async addDummy() {
 		try{
 			//dummy database records
-			console.log(Date().toString())
 			const date = Date().toString()
 			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName)
         		VALUES("${date}","Mariaze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
@@ -41,6 +36,12 @@ module.exports = class Download {
 		} catch(err) {
 			throw err
 		}
+	}
+
+	async encryptedURL(encrypted) {
+		const sql = `SELECT * FROM files WHERE encryptedFileName = ${encrypted}`
+		const file = this.db.get(sql)
+		return file
 	}
 
 	async getName(downloadId) {

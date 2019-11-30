@@ -41,6 +41,7 @@ module.exports = class User {
 	async uploadPicture(path, mimeType, user) {
 		const extension = mime.extension(mimeType)
 		await fs.copy(path, `public/avatars/${user}.${extension}`)
+		return true
 	}
 
 	async login(user, password) {
