@@ -3,7 +3,6 @@
  * @requires "bcrpt"
  * @requires "fs"
  * @requires "mime"
- * @requires "saltRounds"
  * @requires "Validator"
  * @requires "table"
  */

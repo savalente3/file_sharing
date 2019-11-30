@@ -1,3 +1,9 @@
+/** 
+ * userVal module
+ * @requires "table"
+ * @requires "sqllite"
+ */
+
 'use strict'
 
 /* MODULE IMPORTS */
@@ -8,6 +14,11 @@ const minLenght = 8
 const atPosition = 2
 
 module.exports = class Validator {
+	/**
+	 * Creates an instance of Validator
+	 * @constructor
+	 * @param {*} dbName 
+	 */
 	constructor(dbName = ':memory:') {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
@@ -17,7 +28,11 @@ module.exports = class Validator {
 		})()
 
 	}
-
+	/**
+	 * userVal function checks that a username is present and of valid length.
+	 * @param {*} user 
+	 * @async
+	 */
  	async userVal(user) {
 		try{
  			if (user.length === 0) throw new Error('Missing username.')
@@ -27,7 +42,12 @@ module.exports = class Validator {
 		}
 	}
 
- 	// eslint-disable-next-line complexity
+	 // eslint-disable-next-line complexity
+	 /**
+	  * emailVal function checks that an email address is present and valid
+	  * @param {*} email 
+	  * @async
+	  */
  	async emailVal(email) {
 		const atPos = email.indexOf('@')
 		const dotPos = email.lastIndexOf('.')
@@ -43,6 +63,11 @@ module.exports = class Validator {
 		}
  	}
 
+	/**
+	 * passVal function checks that a password is present and of valid length.
+	 * @param {*} pass 
+	 * @async
+	 */
  	async passVal(pass) {
 		try {
 			if(pass.length === 0) throw new Error('Missing password.')
