@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-	<title>File Sharing</title>
+	<title>Brocolli Share</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="Free File Sharing Tool">
+	<meta name="description" content="Free Secure File Sharing Tool">
 	<meta name="keywords" content="file, sharing, free, software,engineering">
 	<meta name="author" content="Green Night Dwellers">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,34 +16,67 @@
 <body class="container">
 	{{>navbar}}
 
-	<article class="homePageContainer">
-		<form action="post">
-			<h2>Send your files to your Friends</h2>
-			<input type="text" name="user" value="email@email.com or username">
-		</form>
 
-		<form method="post" action="" enctype="multipart/form-data">
+	<script>
+		// pop on click to let the user know the file has been uploaded
+		function myFunction() {
+			const popup = document.getElementById("myPopup");
+			popup.classList.toggle("show");
+		}
+	</script>
+
+	<! Container for File Upload form >
+	<article class="homePageContainer">
+		<form method="post" action="/upload" enctype="multipart/form-data">
+			<h2>Send your files to your Friends</h2>
+
+			<! The user enters the recipient for their file >
+			{{#if user}}
+				<input type="text" placeholder="email@email.com or username" name="emailOrUsername">
+			{{else}}
+				<input type="text" placeholder="email@email.com or username" name="emailOrUsername" disabled>
+			{{/if}}
+
+			<br>
 			<h3>Search for file</h3>
-			<input class="box__file" type="file" name="files[]" data-multiple-caption="{count} files selected"
-				multiple />
-			<div class="box__input box">
-				<br>
+
+			<! The user browses their computer for the file to upload. Or uses the drag n drop features >
+			{{#if user}}
+				<input class="box__file" type="file" name="file" data-multiple-caption="{count} files selected" multiple />
+			{{else}}
+				<input class="box__file" type="file" name="file" data-multiple-caption="{count} files selected" multiple disabled />
+			{{/if}}
+			
+			<section class="box__input box">
 				<label for="file">
-					<span class="box__dragndrop">
-						Drag And Drop Here
-					</span>
+					<object class="box__dragndrop">
+						<br>
+						<p>Drag And Drop Here</p>
+					</object>
 				</label>
 				<br>
-			</div>
+			</section>
+
+			<! the user can submit their file to upload and send to their desired recipient>
+			{{#if user}}
+			<button class="box__button popup" onclick="myFunction()" id="registerButton" type="submit">Upload
+				<section class="popuptext" id="myPopup">Done!</section>
+			</button>
+			{{else}}
+			<button class="box__button popup" onclick="myFunction()" id="registerButton2" type="submit" disabled>Upload
+				<section class="popuptext" id="myPopup">Done!</section>
+			</button>
 			<br>
-			<button class="box__button" id="registerButton" type="submit">Upload</button>
-			
+			{{/if}}
+
+			<! The status/success of the upload is tracked and can be returned>
 			<div class="box__uploading">Uploading&hellip;</div>
 			<div class="box__success">Done!</div>
 			<div class="box__error">Error! <span></span>.</div>
 		</form>
 	</article>
 
+	<! article container placeholder for demonstration video >
 	<article class="homePageContainer marginRight">
 		<iframe width="560" height="315" class="center" src="https://www.youtube.com/embed/C0DPdy98e4c" frameborder="0"
 			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -51,7 +84,6 @@
 	</article>
 
 	{{>footer}}
-
 </body>
 
 </html>

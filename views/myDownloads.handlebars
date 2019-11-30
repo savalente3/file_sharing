@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <title>Website Name</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="Free File Sharing Tool">
-	<meta name="keywords" content="file, sharing, free, software,engineering">
-	<meta name="author" content="Green Night Dwellers">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="description" content="Free File Sharing Tool">
+    <meta name="keywords" content="file, sharing, free, software,engineering">
+    <meta name="author" content="Green Night Dwellers">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/style.css" type="text/css" rel="stylesheet">
 
 </head>
 
 <body class="container">
-        {{>navbar}}
+    {{>navbar}}
 
-        <article class="previewBox">
-            <strong>Preview Box</strong>
-            <p><object class="previewBox" type="image/jpg" data="download_working_files/preview_example.jpg" style="width:50%; height:50%;"></object></p>
-            
-        </article>
+    <article class="homePageContainer">
+        <h1>Preview Your File</h1>
+        <section class="box boxSize">
+        </section>
+        <br>
+        {{!-- information about file, such as filety type, size, name --}}
+        <section class="infoBox">
+        </section>
+    </article>
 
-        <aside class="fileBox">
-            <strong>Your Files</strong>
-            <p><iframe src="../download_working_files/file_list_example.png" class="fileList"></iframe></p>
+    <article class="homePageContainer marginRight">
+        <h1>Available Downloads</h1>
+        <section class="box boxSize">
 
-            <p id="fileInfoText"><strong>File info</strong></p>
-            <p><object class="previewBox" type="image/jpg" data="download_working_files/file_info_example.png" style="width:75%; height:20%;"></object></p>
-            
-            
-            <p id="registerButton"><button><a href={{filePath}} download={{fileName}}>DOWNLOAD</a></button></p>
-        </aside>
+        </section>
+        <br>
+        <button id="registerButton">Download</button>
+    </article>
 
-        {{>footer}}
+    {{>footer}}
 </body>
 
 </html>
