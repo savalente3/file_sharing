@@ -3,6 +3,11 @@
 'use strict'
 
 /* MODULE IMPORTS */
+/**
+ * filesRouts.js defines the routes for uploaded and downloaded files.
+ * @requires "Router"
+ * @requires "koaBody"
+ */
 const Router = require('koa-router')
 const koaBody = require('koa-body')({
 	multipart: true,

@@ -2,6 +2,11 @@
 'use strict'
 
 /* MODULE IMPORTS */
+/**
+ * userRoutes.js defines the routes for the user
+ * @requires "Router"
+ * @requires "koaBody"
+ */
 const Router = require('koa-router')
 const koaBody = require('koa-body')({
 	multipart: true,
