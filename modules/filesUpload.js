@@ -1,9 +1,9 @@
 /**
  * This is the filesUpload module
- * @requires "sqllite-async"
- * @requires "../TablesDatabase.js"
- * @requires "fs-extra"
- * @requires "mime-types"
+ * @requires "sqllite"
+ * @requires "table"
+ * @requires "fs"
+ * @requires "mime"
  */
 
 'use strict'
@@ -16,6 +16,7 @@ const mime = require('mime-types')
 module.exports = class Upload {
 	/**
 	 * Creates an instance of Upload
+	 * @constructor
 	 * @param {*} dbName - the name of the database
 	 */
 	constructor(dbName = ':memory:') {

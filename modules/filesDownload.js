@@ -1,7 +1,7 @@
 /**
  * This is the filesDownload module 
- * @requires "sqllite-async"
- * @requires "../TablesDatabase.js"
+ * @requires "sqllite"
+ * @requires "table"
  */
 
 'use strict'

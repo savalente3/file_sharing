@@ -1,3 +1,13 @@
+/**
+ * user module
+ * @requires "bcrpt"
+ * @requires "fs"
+ * @requires "mime"
+ * @requires "saltRounds"
+ * @requires "Validator"
+ * @requires "table"
+ */
+
 'use strict'
 
 const bcrypt = require('bcrypt-promise')
@@ -10,6 +20,12 @@ const table = require('../TablesDatabase')
 
 module.exports = class User {
 
+	/**
+	 * Creates an instance of user
+	 * @constructor
+	 * @param {*} dbName 
+	 */
+
 	constructor(dbName = ':memory:') {
 		return (async() => {
 			this.db = await sqlite.open(dbName)
@@ -19,6 +35,13 @@ module.exports = class User {
 		})()
 	}
 
+	/**
+	 * register function takes user details and inserts them into user database.
+	 * @param {*} user 
+	 * @param {*} email 
+	 * @param {*} pass 
+	 * @async
+	 */
 	async register(user, email, pass) {
 		try {
 			const valid = await new Validator()
@@ -38,11 +61,24 @@ module.exports = class User {
 		}
 	}
 
+	/**
+	 * uploadPicture function allows the user to upload their avatar.
+	 * @param {*} path 
+	 * @param {*} mimeType 
+	 * @param {*} user 
+	 * @async
+	 */
 	async uploadPicture(path, mimeType, user) {
 		const extension = mime.extension(mimeType)
 		await fs.copy(path, `public/avatars/${user}.${extension}`)
 	}
 
+	/**
+	 * login function allows the user to login, given a valid user and password is inputted
+	 * @param {*} user 
+	 * @param {*} password 
+	 * @async
+	 */
 	async login(user, password) {
 		try {
 			let sql = `SELECT count(id) AS count FROM users WHERE username = "${user}";`
