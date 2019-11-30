@@ -18,13 +18,9 @@ module.exports = class Download {
 	 */
 	constructor(dbName = ':memory:') {
 		return (async() => {
-			try{
-				this.db = await sqlite.open(dbName)
-				await this.db.run(table.createFileTable())
-		  	return this
-			} catch(err) {
-				throw err
-			}
+			this.db = await sqlite.open(dbName)
+			await this.db.run(table.createFileTable())
+			return this
 		})()
 	}
 
@@ -36,8 +32,9 @@ module.exports = class Download {
 	async addDummy() {
 		try{
 			//dummy database records
+			const date = Date().toString()
 			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName)
-        		VALUES("date('now')","toze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
+        		VALUES("${date}","Mariaze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
 			await this.db.run(sqlNew)
 		} catch(err) {
 			throw err
@@ -62,11 +59,12 @@ module.exports = class Download {
 		}
 	}
 
-	/**
-	 * getName function fetches the name of a file, given it's downloadID
-	 * @async
-	 * @param {*} downloadId 
-	 */
+	async encryptedURL(encrypted) {
+		const sql = `SELECT * FROM files WHERE encryptedFileName = ${encrypted}`
+		const file = this.db.get(sql)
+		return file
+	}
+
 	async getName(downloadId) {
 		try {
 			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}";`

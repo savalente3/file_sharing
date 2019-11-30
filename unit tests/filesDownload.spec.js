@@ -21,7 +21,7 @@ describe('getName()', () => {
 		try{
 			const file = await new Download()
 			await file.addDummy(124)
-			await file.getName(125)	
+			await file.getName(125)
 		} catch(err) {
 			expect(err.message).toBe('Inexistent file.')
 		} finally {

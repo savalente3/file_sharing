@@ -25,6 +25,8 @@ module.exports = class Upload {
 			await this.db.run(table.createFileTable())
 			return this
 		})()
+		// const senderEmail
+
 	}
 
 	/**
@@ -38,11 +40,19 @@ module.exports = class Upload {
 		await this.db.run(sql)
 	}
 
+	async testEmail() {
+		await this.db.run(table.createUserTable())
+		const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
+		VALUES("receiverEmail@gmail.com", "senderEmail@gmail.com", "private/png/666666666", "666666666")`
+		await this.db.run(sql)
+	}
+
 	/**
 	 * getSenderEmailWithUsername function, fetches the email address of an inputted user from a database
 	 * @param {*} username 
 	 * @async
 	 */
+
 	async getSenderEmailWithUsername(username) {
 		const sql1 = `SELECT email FROM users WHERE username = "${username}";`
 		this.senderEmail = await this.db.get(sql1)
@@ -58,14 +68,12 @@ module.exports = class Upload {
 	 * @async
 	 */
 	async uploadFiles(path, mimeType, fileName) {
-		try {
-			const extension = mime.extension(mimeType)
-			this.filepath = `private/${extension}/${fileName}`
-			this.fileName = fileName
-			await fs.copy(path, this.filepath)
-		} catch (err) {
-			throw err
-		}
+		const extension = mime.extension(mimeType)
+		console.log(extension)
+		this.filepath = `private/${extension}/${fileName}`
+		this.fileName = fileName
+		await fs.copy(path, this.filepath)
+		return true
 	}
 
 	/**
@@ -77,8 +85,10 @@ module.exports = class Upload {
 		try {
 			const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
 			VALUES("${ReceiverEmail}", "${this.senderEmail.email}", "${this.filepath}", "${this.fileName}")`
-			await this.db.get(sql)
-			return this.filepath
+			this.insert = await this.db.get(sql)
+			if(this.insert === undefined) throw new Error('Inexistent user.')
+			// if(this.senderEmail === undefined) throw new Error('Inexistent user.')
+			return true
 		} catch (err) {
 			throw err
 		}
@@ -96,8 +106,6 @@ module.exports = class Upload {
 		try {
 			const sql1 = `SELECT email FROM users WHERE username = "${ReceiverUsername}";`
 			const ReceiverEmail = await this.db.get(sql1)
-			console.log(`${this.filepath}sofia`)
-			console.log(this.senderEmail.email)
 			const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
 			VALUES("${ReceiverEmail.email}", "${this.senderEmail.email}", "${this.filepath}", "${this.fileName}")`
 			await this.db.get(sql)
