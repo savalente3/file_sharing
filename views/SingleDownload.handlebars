@@ -1,0 +1,16 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+    <h1>Click To download</h1>
+    </head>
+    <body>
+    {{#if user}}
+		<button class="box__button popup" onclick="myFunction()" id="registerButton" type="submit">Upload
+			<section class="popuptext" id="myPopup">Done!</section>
+		</button>
+	{{else}}
+		<button class="box__button popup" onclick="myFunction()" id="registerButton2" type="submit" disabled>Upload
+			<section class="popuptext" id="myPopup">Done!</section>
+		</button>
+    </body>

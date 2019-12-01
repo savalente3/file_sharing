@@ -17,6 +17,7 @@ module.exports = class Table {
         uploadDate TEXT,
         senderEmail TEXT,
         receiverEmail TEXT,
+        encryptedFileName TEXT,
         FOREIGN KEY(senderEmail) REFERENCES users(username)
          );`
 	}
