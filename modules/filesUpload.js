@@ -12,6 +12,8 @@ const sqlite = require('sqlite-async')
 const table = require('../TablesDatabase.js')
 const fs = require('fs-extra')
 const mime = require('mime-types')
+var crypto = require('crypto')
+
 
 module.exports = class Upload {
 	/**
@@ -94,6 +96,8 @@ module.exports = class Upload {
 		}
 	}
 
+
+
 	// uploads a file with the username of the receiver
 	// gets email of receiver with the user name and inserts into database the email with the
 	// username of the sender, file path and file name
@@ -114,4 +118,32 @@ module.exports = class Upload {
 			throw err
 		}
 	}
+
+	
+	async makeHash(fileName) {
+		const mykey = crypto.createCipher('aes-128-cbc','mypassword')
+		let mystr = mykey.update(fileName, 'utf8', 'hex')
+		mystr = mystr + mykey.final('hex')
+		this.mystr = mystr
+		if(fileName === '') throw new Error('Invalid File Name')
+		return mystr
+		
+	  }
+
+	async storeHash(encrypted, fileName) {
+		const sql = `UPDATE files SET encryptedFileName = "${encrypted}" WHERE fileName = "${fileName}"`
+		await this.db.run(sql)
+		return encrypted
+	}
+
+	async testDummy() {
+		const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
+		VALUES("1", "1", "1", "Broccoli.png")`
+		await this.db.run(sql)
+	  }
+
+	async testHash() {
+		const sql = `SELECT encryptedFileName FROM files WHERE fileName = 'Broccoli.png'`
+		await this.db.run(sql)
+	  }
 }

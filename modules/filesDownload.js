@@ -33,8 +33,9 @@ module.exports = class Download {
 		try{
 			//dummy database records
 			const date = Date().toString()
-			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName)
-        		VALUES("${date}","Mariaze@gmail.com", 1, "../images/alarm.png", "Alarm Image")`
+			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName, encryptedFileName)
+        		VALUES("${date}","toze@gmail.com", 1, "../images/alarm.png", "Alarm Image", "666")`
+			const date = Date().toString()
 			await this.db.run(sqlNew)
 		} catch(err) {
 			throw err
@@ -67,7 +68,7 @@ module.exports = class Download {
 
 	async getName(downloadId) {
 		try {
-			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}";`
+			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}"`
 			const records = await this.db.get(sql)
 			if(records === 0) throw new Error('Inexistent file.')
 			const sql2 = `SELECT fileName FROM files WHERE downloadId = ${downloadId}`
@@ -90,5 +91,32 @@ module.exports = class Download {
 		} catch(err) {
 			throw err
 		}
+	}
+
+	async getHash(encryptedFileName) {
+		const sql1 = `SELECT * FROM files WHERE encryptedFileName = "${encryptedFileName}"`
+		const file = await this.db.get(sql1)
+		return file
+	  }
+
+	async testDummy() {
+		const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName, encryptedFileName)
+		VALUES("1", "1", "1", "Broccoli.png", "Br0cc0l1")`
+		await this.db.run(sql)
+	  }
+	
+	async testHash(fileName) {
+		const sql1 = `SELECT encryptedFileName FROM files WHERE fileName = "${fileName}"`
+		await this.db.get(sql1)
+	}
+
+	async testHash2(encryptedFileName) {
+		try {
+			const sql1 = `SELECT * FROM files WHERE encryptedFileName = "${encryptedFileName}"`
+			await this.db.get(sql1)
+		} catch(err) {
+			throw err
+		}
+		
 	}
 }
