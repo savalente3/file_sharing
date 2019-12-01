@@ -25,3 +25,45 @@ describe('getSenderEmailWithUsername(username)', () => {
 	})
 
 })
+
+describe('makeHash()', () => {
+	beforeEach( async() => {
+		const upload = await new Upload()
+		upload.testDummy()
+	})
+
+
+	test('Creating a Hash key based on the file name', async done => {
+		expect.assertions(1)
+		try {
+			const upload = await new Upload()
+			upload.makeHash('Broccoli.png')
+			upload.storeHash()
+			expect(upload.makeHash()).toEqual(upload.testHash())
+		} catch (err) {
+			done.fail(err)
+		} finally {
+			done()
+		}
+	})
+
+})
+
+describe('storeHash()', () => {
+	beforeEach( async() => {
+		const upload = await new Upload()
+		upload.testDummy()
+	})
+
+	test('Storing the hash in the DB', async done => {
+		try{
+			const upload =  await new Upload()
+			await upload.storeHash('Br0cc0l1', 'Broccoli.png')
+			expect(upload.storeHash('Br0cc0l1', 'Broccoli.png')).toEqual(upload.testHash())
+		} catch(err) {
+			done.fail(err)
+		} finally {
+			done()
+		}
+	})
+})
