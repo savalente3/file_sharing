@@ -1,6 +1,24 @@
 'use strict'
 
 const Upload = require('../modules/filesUpload.js')
+const mock = require('mock-fs')
+
+beforeAll( async() => {
+	// mock({
+	// 	'img1.png': Buffer.from([8, 6, 7, 5, 3, 0, 9]),
+	// 	'img2.doc': Buffer.from([8, 6, 7, 5, 3, 0, 9])
+	// })
+	// mock({
+	// 	'some/dir': mock.directory({
+	// 		mode: '0755',
+	// 		items: {
+	// 			file1: Buffer.from([8, 6, 7, 5, 3, 0, 9]),
+	// 			file2: Buffer.from([8, 6, 7, 5, 3, 0, 9])
+	// 		}
+	// 	})
+	// })
+
+})
 
 describe('getSenderEmailWithUsername(username)', () => {
 
@@ -13,8 +31,6 @@ describe('getSenderEmailWithUsername(username)', () => {
 		done()
 	})
 
-	//works fine with the receiver username, but doesnt for the receiver email
-
 	test('Invalid username.', async done => {
 		expect.assertions(1)
 		const upload = await new Upload()
@@ -23,7 +39,28 @@ describe('getSenderEmailWithUsername(username)', () => {
 			.toEqual(Error('Inexistent user.'))
 		done()
 	})
+})
 
+describe('uploadFiles()', () => {
+
+	test('uploadFiles send imgage', async done => {
+		expect.assertions(1)
+		const upload = await new Upload()
+		await upload.testUser()
+		await upload.testEmail()
+		const user = await upload.uploadFiles('png','image/png','dummy.png').mock
+		expect(user).toBe(undefined)
+		done()
+
+	})
+	// test('----------', async done => {
+	// 	expect.assertions(1)
+	// 	const upload = await new Upload()
+	// 	await upload.testUser()
+	// 	const user = await upload.getSenderEmailWithUsername('test')
+	// 	expect(user.email).toBe('sofiacirne12@gmail.com')
+	// 	done()
+	// })
 })
 
 describe('makeHash()', () => {

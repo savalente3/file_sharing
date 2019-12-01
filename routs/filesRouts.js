@@ -3,6 +3,11 @@
 'use strict'
 
 /* MODULE IMPORTS */
+/**
+ * filesRouts.js defines the routes for uploaded and downloaded files.
+ * @requires "Router"
+ * @requires "koaBody"
+ */
 const Router = require('koa-router')
 const koaBody = require('koa-body')({
 	multipart: true,
@@ -83,8 +88,7 @@ router.post('/upload', koaBody, async ctx => {
 	}
 })
 
-
-/**
+/**b
  * The single download page.
  *
  * @name FileDownload Page
