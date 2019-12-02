@@ -5,16 +5,12 @@
  * @requires "fs"
  * @requires "mime"
  */
-
 'use strict'
-
 const sqlite = require('sqlite-async')
 const table = require('../TablesDatabase.js')
 const fs = require('fs-extra')
 const mime = require('mime-types')
-var crypto = require('crypto')
-
-
+const crypto = require('crypto')
 module.exports = class Upload {
 	/**
 	 * Creates an instance of Upload
@@ -27,11 +23,9 @@ module.exports = class Upload {
 			await this.db.run(table.createFileTable())
 			return this
 		})()
-		// const senderEmail
-
 	}
-
 	/**
+	 * inserts into users table a dummy user
 	 * testUser function
 	 * @async
 	 */
@@ -41,17 +35,20 @@ module.exports = class Upload {
 		VALUES("test", "sofiacirne12@gmail.com", "666666666")`
 		await this.db.run(sql)
 	}
-
+	/**
+	 * inserts into files table a dummy file
+	 * testUser function
+	 * @async
+	 */
 	async testEmail() {
 		await this.db.run(table.createUserTable())
 		const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
-		VALUES("receiverEmail@gmail.com", "senderEmail@gmail.com", "private/png/666666666", "666666666")`
+		VALUES("receiverEmail@gmail.com", "senderEmail@gmail.com", "png/666666666", "666666666")`
 		await this.db.run(sql)
 	}
-
 	/**
 	 * getSenderEmailWithUsername function, fetches the email address of an inputted user from a database
-	 * @param {*} username 
+	 * @param {*} username
 	 * @async
 	 */
 
@@ -61,26 +58,25 @@ module.exports = class Upload {
 		if(this.senderEmail === undefined) throw new Error('Inexistent user.')
 		return this.senderEmail
 	}
-
 	/**
 	 * uploadFiles function copies a file to it's private file path.
-	 * @param {*} path 
-	 * @param {*} mimeType 
-	 * @param {*} fileName 
+	 * @param {*} path
+	 * @param {*} mimeType
+	 * @param {*} fileName
 	 * @async
 	 */
 	async uploadFiles(path, mimeType, fileName) {
 		const extension = mime.extension(mimeType)
 		console.log(extension)
-		this.filepath = `private/${extension}/${fileName}`
+		this.filepath = `${extension}/${fileName}`
 		this.fileName = fileName
 		await fs.copy(path, this.filepath)
 		return true
 	}
-
 	/**
-	 * sendFileWithReceiverEmail function uploads a file with the email of the receiver and inserts into the database the file name, recipient email and file path.
-	 * @param {*} ReceiverEmail 
+	 * sendFileWithReceiverEmail function uploads a file with the email of the receiver and
+	 * inserts into the database the file name, recipient email and file path.
+	 * @param {*} ReceiverEmail
 	 * @async
 	 */
 	async sendFileWithReceiverEmail(ReceiverEmail) {
@@ -88,22 +84,15 @@ module.exports = class Upload {
 			const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
 			VALUES("${ReceiverEmail}", "${this.senderEmail.email}", "${this.filepath}", "${this.fileName}")`
 			this.insert = await this.db.get(sql)
-			if(this.insert === undefined) throw new Error('Inexistent user.')
-			// if(this.senderEmail === undefined) throw new Error('Inexistent user.')
 			return true
 		} catch (err) {
 			throw err
 		}
 	}
-
-
-
-	// uploads a file with the username of the receiver
-	// gets email of receiver with the user name and inserts into database the email with the
-	// username of the sender, file path and file name
 	/**
-	 * sendFileWithReceiverUsername function uploads a file with the username of the recipient. Uses username to fetch recipient email. Inserts file name, file path and recipient email into Database
-	 * @param {*} ReceiverUsername 
+	 * sendFileWithReceiverUsername function uploads a file with the username of the recipient.
+	 * Uses username to fetch recipient email. Inserts file name, file path and recipient email into Database
+	 * @param {*} ReceiverUsername
 	 * @async
 	 */
 	async sendFileWithReceiverUsername(ReceiverUsername) {
@@ -119,7 +108,12 @@ module.exports = class Upload {
 		}
 	}
 
-	
+	/**
+	 * makeHash gets the file name after uploaded to private folder and hashes it using crypto
+	 *
+	 * @param {*} fileName
+	 * @async
+	 */
 	async makeHash(fileName) {
 		const mykey = crypto.createCipher('aes-128-cbc','mypassword')
 		let mystr = mykey.update(fileName, 'utf8', 'hex')
@@ -127,23 +121,41 @@ module.exports = class Upload {
 		this.mystr = mystr
 		if(fileName === '') throw new Error('Invalid File Name')
 		return mystr
-		
+
 	  }
 
-	async storeHash(encrypted, fileName) {
-		const sql = `UPDATE files SET encryptedFileName = "${encrypted}" WHERE fileName = "${fileName}"`
+	/**
+	 * stores the hash string in the database
+	 *
+	 * @param {*} encrypted, fileName
+	 * @async
+	 */
+	async storeHash(encryptedFileName, fileName) {
+		const sql = `UPDATE files SET encryptedFileName = "${encryptedFileName}" WHERE fileName = "${fileName}"`
 		await this.db.run(sql)
-		return encrypted
+		return encryptedFileName
 	}
 
+	/**
+	 * test function to populate database
+	 *
+	 * @param {*} encrypted, fileName
+	 * @async
+	 */
 	async testDummy() {
 		const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
 		VALUES("1", "1", "1", "Broccoli.png")`
 		await this.db.run(sql)
 	  }
 
+	/**
+	 * test function to populate database
+	 *
+	 * @param {*}
+	 * @async
+	 */
 	async testHash() {
-		const sql = `SELECT encryptedFileName FROM files WHERE fileName = 'Broccoli.png'`
+		const sql = 'SELECT encryptedFileName FROM files WHERE fileName = \'Broccoli.png\''
 		await this.db.run(sql)
 	  }
 }

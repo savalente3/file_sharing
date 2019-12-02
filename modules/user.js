@@ -95,4 +95,28 @@ module.exports = class User {
 		}
 	}
 
+		/**
+	 * getUser function selects user from  database
+	 * @param {*} user 
+	 * @param {*} isEmail 
+	 * @async
+	 */
+	async getUser(user, isEmail) {
+		try {
+			if(isEmail === 'email') {
+				const sql = `SELECT * FROM users WHERE email = "${user}";`
+				const records = await this.db.get(sql)
+				if (records === undefined ) throw new Error('invalid username or email')
+				return records
+			} else {
+				const sql = `SELECT * FROM users WHERE username = "${user}";`
+				const records = await this.db.get(sql)
+				if (records === undefined ) throw new Error('invalid username or email')
+				return records
+			}
+		} catch (err) {
+			throw err
+		}
+	}
+
 }

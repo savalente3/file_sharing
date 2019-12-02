@@ -17,10 +17,12 @@ const koaBody = require('koa-body')({
 /* IMPORT CUSTOM MODULES */
 const Download = require('../modules/filesDownload')
 const Upload = require('../modules/filesUpload')
-
+const nMailer = require('../modules/nodemailer')
+const userModule = require('../modules/user')
 
 const router = new Router()
 const dbName = 'website.db'
+const isEmailInput = /\S+@\S+\.\S+/ //RegEx  something@something.som
 
 /**
  * The user download list page.
@@ -51,10 +53,8 @@ router.get('/myDownloads/', async ctx => {
  * @route {GET} /
  */
 router.get('/', async ctx => {
-	console.log(ctx.session.user)
 	await ctx.render('homepage', {user: ctx.session.user})
 })
-
 /**
  * The website's home/upload page after upload is done.
  *
@@ -65,23 +65,27 @@ router.get('/', async ctx => {
 router.post('/upload', koaBody, async ctx => {
 	try {
 		const upload = await new Upload(dbName)
+		const download = await new Download(dbName)
 		const body = ctx.request.body
 		const file = ctx.request.files.file
-		const isEmailInput = /\S+@\S+\.\S+/
+		const user = await new userModule(dbName)
 		await upload.getSenderEmailWithUsername(ctx.session.user)
 		if (isEmailInput.test(ctx.request.body.emailOrUsername)) {
 			await upload.uploadFiles(file.path, file.type, file.name)
 			await upload.sendFileWithReceiverEmail(body.emailOrUsername)
 		}else {
+			await user.getUser(body.emailOrUsername,'user')
 			await upload.uploadFiles(file.path, file.type, file.name)
 			await upload.sendFileWithReceiverUsername(body.emailOrUsername)
 		}
+		const encryptedFileName = await upload.makeHash(file.name)
+		await upload.storeHash(encryptedFileName, file.name)
+		const getFileEncripted = await download.getHash(encryptedFileName)
+		const nodeEmailer = await new nMailer(getFileEncripted)
+		await nodeEmailer.sendEmail()
 		ctx.redirect(`/?msg=new user "${file.name}" uploaded`)
-		const encrypted = await upload.makeHash(file.name)
-		await upload.storeHash(encrypted, file.name)
 		upload.db.close()
 	} catch (err) {
-		console.log(err)
 		await ctx.render('error', {
 			message: err.message
 		})
@@ -94,9 +98,8 @@ router.post('/upload', koaBody, async ctx => {
  * @name FileDownload Page
  * @route {GET} /downloadFile
  */
-// eslint-disable-next-line max-lines-per-function
 router.get('/downloadFile/:encryptedFileName', async ctx => {
-	const fileSender = new Download(dbName)
+	const fileSender = await new Download(dbName)
 	const downloadID = await fileSender.getDownloadId(ctx.params.encryptedFileName)
 	const download = await fileSender.download(downloadID.downloadId)
 	const downloadName = await fileSender.getName(downloadID.downloadId)
@@ -104,12 +107,14 @@ router.get('/downloadFile/:encryptedFileName', async ctx => {
 		await ctx.render('downloadFile', {
 			filePath: download.filePath,
 			fileName: downloadName.fileName,
-			user: ctx.session.user
+			user: ctx.session.user,
+			id: ctx.params.encryptedFileName
 		})
 	} else {
 		await ctx.render('downloadFile', {
 			filePath: download.filePath,
-			fileName: downloadName.fileName
+			fileName: downloadName.fileName,
+			id: ctx.params.encryptedFileName
 		})
 	}
 })
@@ -120,10 +125,15 @@ router.get('/downloadFile/:encryptedFileName', async ctx => {
  * @name FileDownload Page
  * @route {POST} /downloadFile
  */
-router.post('/downloadFile/:downloadId', async ctx => {
-	try {
-		const fileSender = new Download(dbName)
-		await fileSender.deleteFile(ctx.params.downloadId)
+router.post('/downloadFile/:encryptedFileName', async ctx => {
+	try {		
+
+		const fileSender = await new Download(dbName)
+		console.log('hello')
+		const downloadID = await fileSender.getDownloadId(ctx.params.encryptedFileName)
+		console.log(downloadID.downloadId)
+		await fileSender.deleteFile(downloadID.downloadId)
+		console.log('hello')
 		ctx.redirect('/?msg=File downloaded and deleted successfully!')
 	} catch (err) {
 		console.log(err)

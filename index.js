@@ -18,6 +18,7 @@ const app = new Koa()
 /* CONFIGURING THE MIDDLEWARE */
 app.keys = ['darkSecret']
 app.use(staticDir('public'))
+app.use(staticDir('./private'))
 app.use(koaBody())
 app.use(bodyParser())
 app.use(session(app))

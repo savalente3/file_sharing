@@ -88,7 +88,7 @@ module.exports = class Download {
 		try {
 			const sql2 = `SELECT filePath FROM files WHERE downloadId = ${downloadId}`
 			const filePath = await this.db.get(sql2)
-			await fs.unlinkSync(filePath)
+			await fs.unlinkSync(filePath.filePath)
 			const sql3 = `DELETE FROM files WHERE downloadId = ${downloadId}`
 			await this.db.run(sql3)
 		} catch(err) {
@@ -103,6 +103,18 @@ module.exports = class Download {
 	 */
 	async getDownloadId(encryptedFileName) {
 		const sql1 = `SELECT downloadId FROM files WHERE encryptedFileName = "${encryptedFileName}"`
+		const file = await this.db.get(sql1)
+		return file
+	  }
+
+
+	/**
+	 * function gets the encryptedFileName from database
+	 *	@async
+	 *  @param {*} encryptedFileName
+	 */
+	  async getHash(encryptedFileName) {
+		const sql1 = `SELECT * FROM files WHERE encryptedFileName = "${encryptedFileName}"`
 		const file = await this.db.get(sql1)
 		return file
 	  }
