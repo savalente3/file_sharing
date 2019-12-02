@@ -8,6 +8,7 @@
 
 const sqlite = require('sqlite-async')
 const table = require('../TablesDatabase.js')
+const fs = require('fs')
 
 module.exports = class Download {
 	
@@ -35,7 +36,6 @@ module.exports = class Download {
 			const date = Date().toString()
 			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName, encryptedFileName)
         		VALUES("${date}","toze@gmail.com", 1, "../images/alarm.png", "Alarm Image", "666")`
-			const date = Date().toString()
 			await this.db.run(sqlNew)
 			return true
 		} catch(err) {
@@ -46,7 +46,7 @@ module.exports = class Download {
 	/**
 	 * download function - fetches the download file path from the database from a given downloadID
 	 * @async
-	 * @param {*} downloadId 
+	 * @param {*} downloadId
 	 */
 	async download(downloadId) {
 		try {
@@ -61,12 +61,11 @@ module.exports = class Download {
 		}
 	}
 
-	async encryptedURL(encrypted) {
-		const sql = `SELECT * FROM files WHERE encryptedFileName = ${encrypted}`
-		const file = this.db.get(sql)
-		return file
-	}
-
+	/**
+	 * getName function fetches the name of a file, given it's downloadID
+	 * @async
+	 * @param {*} downloadId
+	 */
 	async getName(downloadId) {
 		try {
 			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}"`
@@ -83,41 +82,28 @@ module.exports = class Download {
 	/**
 	 * function deleteFile, deletes the file from it's path, given the downloadID
 	 *	@async
-	 *  @param {*} downloadId 
+	 *  @param {*} downloadId
 	 */
 	async deleteFile(downloadId) {
 		try {
-			const sql2 = `DELETE FROM files WHERE downloadId = ${downloadId}`
-			await this.db.run(sql2)
+			const sql2 = `SELECT filePath FROM files WHERE downloadId = ${downloadId}`
+			const filePath = await this.db.get(sql2)
+			await fs.unlinkSync(filePath)
+			const sql3 = `DELETE FROM files WHERE downloadId = ${downloadId}`
+			await this.db.run(sql3)
 		} catch(err) {
 			throw err
 		}
 	}
 
-	async getHash(encryptedFileName) {
-		const sql1 = `SELECT * FROM files WHERE encryptedFileName = "${encryptedFileName}"`
+	/**
+	 * function gets the downloadId from database
+	 *	@async
+	 *  @param {*} encryptedFileName
+	 */
+	async getDownloadId(encryptedFileName) {
+		const sql1 = `SELECT downloadId FROM files WHERE encryptedFileName = "${encryptedFileName}"`
 		const file = await this.db.get(sql1)
 		return file
 	  }
-
-	async testDummy() {
-		const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName, encryptedFileName)
-		VALUES("1", "1", "1", "Broccoli.png", "Br0cc0l1")`
-		await this.db.run(sql)
-	  }
-	
-	async testHash(fileName) {
-		const sql1 = `SELECT encryptedFileName FROM files WHERE fileName = "${fileName}"`
-		await this.db.get(sql1)
-	}
-
-	async testHash2(encryptedFileName) {
-		try {
-			const sql1 = `SELECT * FROM files WHERE encryptedFileName = "${encryptedFileName}"`
-			await this.db.get(sql1)
-		} catch(err) {
-			throw err
-		}
-		
-	}
 }
