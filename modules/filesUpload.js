@@ -81,8 +81,9 @@ module.exports = class Upload {
 	 */
 	async sendFileWithReceiverEmail(ReceiverEmail) {
 		try {
-			const sql = `INSERT INTO files(receiverEmail, senderEmail, filePath, fileName)
-			VALUES("${ReceiverEmail}", "${this.senderEmail.email}", "${this.filepath}", "${this.fileName}")`
+			const date = Date().toString()
+			const sql = `INSERT INTO files(receiverEmail, uploadDate, senderEmail, filePath, fileName)
+			VALUES("${ReceiverEmail}", "${date}", "${this.senderEmail.email}", "${this.filepath}", "${this.fileName}")`
 			this.insert = await this.db.get(sql)
 			return true
 		} catch (err) {

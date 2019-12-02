@@ -1,5 +1,5 @@
 /**
- * This is the filesDownload module 
+ * This is the filesDownload module
  * @requires "sqllite"
  * @requires "table"
  */
@@ -11,7 +11,7 @@ const table = require('../TablesDatabase.js')
 const fs = require('fs')
 
 module.exports = class Download {
-	
+
 	/**
 	 * Creates an instance of Download.
 	 * @constructor
@@ -29,12 +29,13 @@ module.exports = class Download {
 	 * addDummy function
 	 * @async
 	 */
-	
+
 	async addDummy() {
 		try{
 			//dummy database records
 			const date = Date().toString()
-			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, senderEmail, filePath, fileName, encryptedFileName)
+			const sqlNew = `INSERT INTO files(uploadDate, receiverEmail, 
+				senderEmail, filePath, fileName, encryptedFileName)
         		VALUES("${date}","toze@gmail.com", 1, "../images/alarm.png", "Alarm Image", "666")`
 			await this.db.run(sqlNew)
 			return true

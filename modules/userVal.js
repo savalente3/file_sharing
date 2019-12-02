@@ -1,4 +1,4 @@
-/** 
+/**
  * userVal module
  * @requires "table"
  * @requires "sqllite"
@@ -17,7 +17,7 @@ module.exports = class Validator {
 	/**
 	 * Creates an instance of Validator
 	 * @constructor
-	 * @param {*} dbName 
+	 * @param {*} dbName
 	 */
 	constructor(dbName = ':memory:') {
 		return (async() => {
@@ -30,7 +30,7 @@ module.exports = class Validator {
 	}
 	/**
 	 * userVal function checks that a username is present and of valid length.
-	 * @param {*} user 
+	 * @param {*} user
 	 * @async
 	 */
  	async userVal(user) {
@@ -45,7 +45,7 @@ module.exports = class Validator {
 	 // eslint-disable-next-line complexity
 	 /**
 	  * emailVal function checks that an email address is present and valid
-	  * @param {*} email 
+	  * @param {*} email
 	  * @async
 	  */
  	async emailVal(email) {
@@ -65,7 +65,7 @@ module.exports = class Validator {
 
 	/**
 	 * passVal function checks that a password is present and of valid length.
-	 * @param {*} pass 
+	 * @param {*} pass
 	 * @async
 	 */
  	async passVal(pass) {
