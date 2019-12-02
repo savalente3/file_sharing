@@ -3,6 +3,11 @@
 'use strict'
 
 /* MODULE IMPORTS */
+/**
+ * filesRouts.js defines the routes for uploaded and downloaded files.
+ * @requires "Router"
+ * @requires "koaBody"
+ */
 const Router = require('koa-router')
 const koaBody = require('koa-body')({
 	multipart: true,
@@ -12,6 +17,7 @@ const koaBody = require('koa-body')({
 /* IMPORT CUSTOM MODULES */
 const Download = require('../modules/filesDownload')
 const Upload = require('../modules/filesUpload')
+
 
 const router = new Router()
 const dbName = 'website.db'
@@ -71,6 +77,8 @@ router.post('/upload', koaBody, async ctx => {
 			await upload.sendFileWithReceiverUsername(body.emailOrUsername)
 		}
 		ctx.redirect(`/?msg=new user "${file.name}" uploaded`)
+		const encrypted = await upload.makeHash(file.name)
+		await upload.storeHash(encrypted, file.name)
 		upload.db.close()
 	} catch (err) {
 		console.log(err)
@@ -80,25 +88,29 @@ router.post('/upload', koaBody, async ctx => {
 	}
 })
 
-/**
+/**b
  * The single download page.
  *
  * @name FileDownload Page
  * @route {GET} /downloadFile
  */
-router.get('/downloadFile/:downloadId', async ctx => {
+
+// eslint-disable-next-line max-lines-per-function
+router.get('/downloadFile/:encryptedFileName', async ctx => {
 	const fileSender = await new Download(dbName)
-	await fileSender.addDummy()
-	const download = await fileSender.download(ctx.params.downloadId)
-	console.log(ctx.params.downloadId)
-	const downloadName = await fileSender.getName(ctx.params.downloadId)
+	const file = await fileSender.getHash(ctx.params.encryptedFileName)
+	console.log(file)
+
 	await ctx.render('downloadFile', {
-		filePath: download.filePath,
-		fileName: downloadName.fileName,
+		filePath: file.filePath,
+		fileName: file.fileName,
 		user: ctx.session.user
 	})
+
 	if (ctx.session.authorised === true) {
 		await ctx.render('downloadFile', {
+			filePath: file.filePath,
+			fileName: file.fileName,
 			user: ctx.session.user
 		})
 	}
