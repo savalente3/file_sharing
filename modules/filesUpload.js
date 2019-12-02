@@ -1,10 +1,3 @@
-/**
- * This is the filesUpload module
- * @requires "sqllite"
- * @requires "table"
- * @requires "fs"
- * @requires "mime"
- */
 'use strict'
 const sqlite = require('sqlite-async')
 const table = require('../TablesDatabase.js')
@@ -51,7 +44,6 @@ module.exports = class Upload {
 	 * @param {*} username
 	 * @async
 	 */
-
 	async getSenderEmailWithUsername(username) {
 		const sql1 = `SELECT email FROM users WHERE username = "${username}";`
 		this.senderEmail = await this.db.get(sql1)
@@ -67,7 +59,6 @@ module.exports = class Upload {
 	 */
 	async uploadFiles(path, mimeType, fileName) {
 		const extension = mime.extension(mimeType)
-		console.log(extension)
 		this.filepath = `${extension}/${fileName}`
 		this.fileName = fileName
 		await fs.copy(path, this.filepath)
@@ -108,10 +99,8 @@ module.exports = class Upload {
 			throw err
 		}
 	}
-
 	/**
 	 * makeHash gets the file name after uploaded to private folder and hashes it using crypto
-	 *
 	 * @param {*} fileName
 	 * @async
 	 */
@@ -122,12 +111,9 @@ module.exports = class Upload {
 		this.mystr = mystr
 		if(fileName === '') throw new Error('Invalid File Name')
 		return mystr
-
 	  }
-
 	/**
 	 * stores the hash string in the database
-	 *
 	 * @param {*} encrypted, fileName
 	 * @async
 	 */
@@ -136,10 +122,8 @@ module.exports = class Upload {
 		await this.db.run(sql)
 		return encryptedFileName
 	}
-
 	/**
 	 * test function to populate database
-	 *
 	 * @param {*} encrypted, fileName
 	 * @async
 	 */
@@ -148,10 +132,8 @@ module.exports = class Upload {
 		VALUES("1", "1", "1", "Broccoli.png")`
 		await this.db.run(sql)
 	  }
-
 	/**
 	 * test function to populate database
-	 *
 	 * @param {*}
 	 * @async
 	 */

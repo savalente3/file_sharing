@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback */ 
+/* eslint-disable prefer-arrow-callback */
 'use strict'
 
 const assert = require('assert')
@@ -8,9 +8,10 @@ const puppeteer = require('puppeteer')
 //Puppeteer browser plus page variables
 let browser
 let currentPage
+const minTimeOut = 60
+const maxTimeOut = 1000
 
-
-setDefaultTimeout(60 * 1000);
+setDefaultTimeout(minTimeOut * maxTimeOut)
 
 //Before the tests are run we need to set up the browser
 BeforeAll(async function() {

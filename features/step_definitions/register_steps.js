@@ -1,4 +1,4 @@
-/* eslint-disable prefer-arrow-callback */ 
+/* eslint-disable prefer-arrow-callback */
 'use strict'
 
 const assert = require('assert')
@@ -8,9 +8,11 @@ const puppeteer = require('puppeteer')
 //Puppeteer browser plus page variables
 let browser
 let currentPage
+const minTimeOut = 60
+const maxTimeOut = 1000
 
+setDefaultTimeout(minTimeOut * maxTimeOut)
 
-setDefaultTimeout(60 * 1000);
 
 //Before the tests are run we need to set up the browser
 BeforeAll(async function() {
@@ -48,8 +50,10 @@ When('I try to register', async function() {
 	await currentPage.click('input[type=submit]')
 })
 
-Then('I should be redirected to the homepage with a message assuring {string} was registered', async function(username) {
-	assert(await currentPage.url() === `http://localhost:8080/?msg=new%20user%20%22${username}%22%20added`, `got ${currentPage.url()}`)
+Then(`I should be redirected to the homepage with a 
+message assuring {string} was registered`, async function(username) {
+	assert(await currentPage.url() === `http://localhost:8080/?msg=new%20user%20%22${username}%22%20added`,
+		`got ${currentPage.url()}`)
 })
 
 
@@ -68,8 +72,10 @@ When('I try to register with no picture', async function() {
 	await currentPage.click('input[type=submit]')
 })
 
-Then('I should be redirected to the homepage with a message assuring {string} was registered with no picture', async function(username) {
-    assert(await currentPage.url() === `http://localhost:8080/?msg=new%20user%20%22${username}%22%20added`, `got ${currentPage.url()}`)
+Then(`I should be redirected to the homepage with a message 
+assuring {string} was registered with no picture`, async function(username) {
+	assert(await currentPage.url() === `http://localhost:8080/?msg=new%20user%20%22${username}%22%20added`,
+		`got ${currentPage.url()}`)
 })
 
 
@@ -89,7 +95,7 @@ When('I try to register an existing username', async function() {
 })
 
 Then('I should stay in the registry page with and error that the user was already taken', async function() {
-    assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
+	assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
 })
 
 
@@ -109,7 +115,7 @@ When('I try to register with an invalid username', async function() {
 })
 
 Then('I should stay in the registry page with and error that the username is invalid', async function() {
-    assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
+	assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
 })
 
 
@@ -129,7 +135,7 @@ When('I try to register with an invalid email', async function() {
 })
 
 Then('I should stay in the registry page with and error that the email is invalid', async function() {
-    assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
+	assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
 })
 
 
@@ -149,5 +155,5 @@ When('I try to register with an invalid password', async function() {
 })
 
 Then('I should stay in the registry page with and error that the password is invalid', async function() {
-    assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
+	assert(await currentPage.url() === 'http://localhost:8080/register', `got ${currentPage.url()}`)
 })

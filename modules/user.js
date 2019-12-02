@@ -22,7 +22,7 @@ module.exports = class User {
 	/**
 	 * Creates an instance of user
 	 * @constructor
-	 * @param {*} dbName 
+	 * @param {*} dbName
 	 */
 
 	constructor(dbName = ':memory:') {
@@ -36,9 +36,9 @@ module.exports = class User {
 
 	/**
 	 * register function takes user details and inserts them into user database.
-	 * @param {*} user 
-	 * @param {*} email 
-	 * @param {*} pass 
+	 * @param {*} user
+	 * @param {*} email
+	 * @param {*} pass
 	 * @async
 	 */
 	async register(user, email, pass) {
@@ -62,9 +62,9 @@ module.exports = class User {
 
 	/**
 	 * uploadPicture function allows the user to upload their avatar.
-	 * @param {*} path 
-	 * @param {*} mimeType 
-	 * @param {*} user 
+	 * @param {*} path
+	 * @param {*} mimeType
+	 * @param {*} user
 	 * @async
 	 */
 	async uploadPicture(path, mimeType, user) {
@@ -75,8 +75,8 @@ module.exports = class User {
 
 	/**
 	 * login function allows the user to login, given a valid user and password is inputted
-	 * @param {*} user 
-	 * @param {*} password 
+	 * @param {*} user
+	 * @param {*} password
 	 * @async
 	 */
 	async login(user, password) {
@@ -95,10 +95,10 @@ module.exports = class User {
 		}
 	}
 
-		/**
+	/**
 	 * getUser function selects user from  database
-	 * @param {*} user 
-	 * @param {*} isEmail 
+	 * @param {*} user
+	 * @param {*} isEmail
 	 * @async
 	 */
 	async getUser(user, isEmail) {

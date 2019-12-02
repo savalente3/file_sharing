@@ -126,7 +126,7 @@ router.get('/downloadFile/:encryptedFileName', async ctx => {
  * @route {POST} /downloadFile
  */
 router.post('/downloadFile/:encryptedFileName', async ctx => {
-	try {		
+	try {
 
 		const fileSender = await new Download(dbName)
 		console.log('hello')

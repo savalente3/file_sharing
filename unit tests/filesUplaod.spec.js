@@ -158,7 +158,7 @@ describe('storeHash()', () => {
 
 	test('Storing the hash in the DB', async done => {
 		try{
-			const upload =  await new Upload()
+			const upload = await new Upload()
 			await upload.storeHash('Br0cc0l1', 'Broccoli.png')
 			expect(upload.storeHash('Br0cc0l1', 'Broccoli.png')).toEqual(upload.testHash())
 		} catch(err) {
