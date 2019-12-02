@@ -80,27 +80,45 @@ router.post('/upload', koaBody, async ctx => {
 	}
 })
 
-/**
+/**b
  * The single download page.
  *
  * @name FileDownload Page
  * @route {GET} /downloadFile
  */
-router.get('/downloadFile/:downloadId', async ctx => {
-	const fileSender = await new Download(dbName)
-	await fileSender.addDummy()
-	const download = await fileSender.download(ctx.params.downloadId)
-	console.log(ctx.params.downloadId)
-	const downloadName = await fileSender.getName(ctx.params.downloadId)
-	await ctx.render('downloadFile', {
-		filePath: download.filePath,
-		fileName: downloadName.fileName,
-		user: ctx.session.user
-	})
+// eslint-disable-next-line max-lines-per-function
+router.get('/downloadFile/:encryptedFileName', async ctx => {
+	const fileSender = new Download(dbName)
+	const downloadID = await fileSender.getDownloadId(ctx.params.encryptedFileName)
+	const download = await fileSender.download(downloadID.downloadId)
+	const downloadName = await fileSender.getName(downloadID.downloadId)
 	if (ctx.session.authorised === true) {
 		await ctx.render('downloadFile', {
+			filePath: download.filePath,
+			fileName: downloadName.fileName,
 			user: ctx.session.user
 		})
+	} else {
+		await ctx.render('downloadFile', {
+			filePath: download.filePath,
+			fileName: downloadName.fileName
+		})
+	}
+})
+
+/**
+ * The single download page.
+ *
+ * @name FileDownload Page
+ * @route {POST} /downloadFile
+ */
+router.post('/downloadFile/:downloadId', async ctx => {
+	try {
+		const fileSender = new Download(dbName)
+		await fileSender.deleteFile(ctx.params.downloadId)
+		ctx.redirect('/?msg=File downloaded and deleted successfully!')
+	} catch (err) {
+		console.log(err)
 	}
 })
 

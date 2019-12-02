@@ -2,6 +2,7 @@
 
 const sqlite = require('sqlite-async')
 const table = require('../TablesDatabase.js')
+const fs = require('fs')
 
 module.exports = class Download {
 	constructor(dbName = ':memory:') {
@@ -29,6 +30,11 @@ module.exports = class Download {
 		}
 	}
 
+	/**
+	 * download function - fetches the download file path from the database from a given downloadID
+	 * @async
+	 * @param {*} downloadId
+	 */
 	async download(downloadId) {
 		try {
 			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}";`
@@ -42,6 +48,11 @@ module.exports = class Download {
 		}
 	}
 
+	/**
+	 * getName function fetches the name of a file, given it's downloadID
+	 * @async
+	 * @param {*} downloadId
+	 */
 	async getName(downloadId) {
 		try {
 			const sql = `SELECT count(downloadId) AS count FROM files WHERE downloadId = "${downloadId}";`
@@ -55,12 +66,31 @@ module.exports = class Download {
 		}
 	}
 
+	/**
+	 * function deleteFile, deletes the file from it's path, given the downloadID
+	 *	@async
+	 *  @param {*} downloadId
+	 */
 	async deleteFile(downloadId) {
 		try {
-			const sql2 = `DELETE FROM files WHERE downloadId = ${downloadId}`
-			await this.db.run(sql2)
+			const sql2 = `SELECT filePath FROM files WHERE downloadId = ${downloadId}`
+			const filePath = await this.db.get(sql2)
+			await fs.unlinkSync(filePath)
+			const sql3 = `DELETE FROM files WHERE downloadId = ${downloadId}`
+			await this.db.run(sql3)
 		} catch(err) {
 			throw err
 		}
 	}
+
+	/**
+	 * function gets the downloadId from database
+	 *	@async
+	 *  @param {*} encryptedFileName
+	 */
+	async getDownloadId(encryptedFileName) {
+		const sql1 = `SELECT downloadId FROM files WHERE encryptedFileName = "${encryptedFileName}"`
+		const file = await this.db.get(sql1)
+		return file
+	  }
 }
