@@ -86,6 +86,7 @@ router.post('/upload', koaBody, async ctx => {
 		ctx.redirect(`/?msg=new user "${file.name}" uploaded`)
 		upload.db.close()
 	} catch (err) {
+		console.log(err.message)
 		await ctx.render('error', {
 			message: err.message
 		})
@@ -129,11 +130,9 @@ router.post('/downloadFile/:encryptedFileName', async ctx => {
 	try {
 
 		const fileSender = await new Download(dbName)
-		console.log('hello')
 		const downloadID = await fileSender.getDownloadId(ctx.params.encryptedFileName)
 		console.log(downloadID.downloadId)
 		await fileSender.deleteFile(downloadID.downloadId)
-		console.log('hello')
 		ctx.redirect('/?msg=File downloaded and deleted successfully!')
 	} catch (err) {
 		console.log(err)

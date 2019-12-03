@@ -59,7 +59,7 @@ module.exports = class Upload {
 	 */
 	async uploadFiles(path, mimeType, fileName) {
 		const extension = mime.extension(mimeType)
-		this.filepath = `${extension}/${fileName}`
+		this.filepath = `private/${extension}/${fileName}`
 		this.fileName = fileName
 		await fs.copy(path, this.filepath)
 		return true

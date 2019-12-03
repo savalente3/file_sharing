@@ -14,11 +14,11 @@ module.exports = class nodeEmail {
 	async sendEmail() {
 		const transporter = nodemailer.createTransport({
 			service: 'gmail',
-			auth: {user: 'sofiacirne12@gmail.com', pass: 'asdfgh123'}
+			auth: {user: 'greennightdwellers@gmail.com', pass: 'WeDwelling123'}
 		})
 		const mailOptions = {
 
-			from: 'sofiacirne12@gmail.com',
+			from: 'greennightdwellers@gmail.com',
 			to: this.receiverEmail,
 			subject: `${this.senderEmail} has sent you a file`,
 			text: `Download your file here: http://localhost:8080/downloadFile/${this.encryptedFileName}`}

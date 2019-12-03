@@ -89,7 +89,7 @@ module.exports = class Download {
 		try {
 			const sql2 = `SELECT filePath FROM files WHERE downloadId = ${downloadId}`
 			const filePath = await this.db.get(sql2)
-			await fs.unlinkSync(filePath.filePath)
+			await fs.unlink(filePath.filePath, async () => { throw new Error(`File wasn't deleted.`)})
 			const sql3 = `DELETE FROM files WHERE downloadId = ${downloadId}`
 			await this.db.run(sql3)
 		} catch(err) {
