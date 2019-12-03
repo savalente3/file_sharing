@@ -13,45 +13,95 @@
 
 <body>
 	{{>navbar}}
-		<section id = "AboutTeam">
-			<h2>About The Team!</h2>
-			<article id = "member1">
-				<dl>
-					<dt id = "dtmember1"> <h3>Team Member 1</h3></dt>
-						<dd id = "ddmember1"> <p>Description Here</p> </dd>
-						
-						
-
-				</dl>
-			</article>
+	
+	<section class = "aboutcontainer">
+		<section class = "AboutTeam"> 
 			
-			<article id = "member2">
+
+			
+			<section class = "box a">
+				<img id="memberimage" src="../images/logo.png" alt="Avatar">
 				<dl>
-					<dt><h3>Team Member 2</h3></dt>
-						<dd> <p>Description Here</p> </dd>
+					<dt> <h3 id="teamnames">Sofia</h3></dt>
+						<dd> <p id="teamdesc">Brocolli Share!</p> </dd>
+				</dl>	
+			</section>
+			
+			<section class = "box b">
+				<img id="memberimage" src="../images/logo.png" alt="Avatar">
+				<dl>
+					<dt><h3 id="teamnames">Eduardo</h3></dt>
+						<dd> <p id="teamdesc">Brocolli Share!</p> </dd>
 				</dl>
-			</article>
+			</section>
+
+			<section class = "box c">
+				<img id="memberimage" src="../images/logo.png" alt="Avatar">
+				<dl>
+					<dt><h3 id="teamnames">Preeth</h3></dt>
+						<dd> <p id="teamdesc">Brocolli Share!</p> </dd>
+				</dl>
+			</section>
+
+			<section class = "box d">
+				<img id="memberimage" src="../images/logo.png" alt="Avatar">
+				<dl>
+					<dt><h3 id="teamnames">Josh</h3></dt>
+						<dd> <p id="teamdesc">Brocolli Share!</p> </dd>
+				</dl>
+			</section>
+
+			<section class = "box e">
+				<img id="memberimage" src="../images/logo.png" alt="Avatar">
+				<dl>
+					<dt><h3 id="teamnames">Mohit</h3></dt>
+						<dd> <p id="teamdesc">Brocolli Share!</p> </dd>
+				</dl>
+			</section>
+
+			<section class = "box f">
+				<img id="memberimage" src="../images/logo.png" alt="Avatar">
+				<dl>
+					<dt><h3 id="teamnames">Guilherme</h3></dt>
+						<dd> <p id="teamdesc">Brocolli Share!</p> </dd>
+				</dl>
+			</section>
+
+			<section class = "box g ">
+				<img id="memberimage" src="../images/logo.png" alt="Avatar">
+			
+				<dl>
+					<dt><h3 id="teamnames">Hassan</h3></dt>
+						<dd> <p id="teamdesc">Brocolli Share!</p> </dd>
+				</dl>
+				</br>
+			</section>
 
 
 		</section>
+</section>
 
-		<aside id = "AboutProject">
-			<article id = "projectdescription">
-				<h1> About The Project </h1>
-				<p> Small Description </p>
-			</article>
+<aside class = "AboutProject">
+			
+			<section class = "projectdescription">
+				
+				<h3> Welcome to BroccoliShare!</h3>
+			</section>
 
-			<article id = "feature1">
-				<h1> Feature Title </h1>
-				<p> Small Description </p>
-			</article>
+			<section class = "feature1">
+				<h1> User Authentication</h1>
+				<p> Users can sign up with a username email and password, and that gives
+					them access to their files. </p>
+			</section>
 
-			<article id = "feature2">
+			<section class = "feature2">
 
-				<h1> Feature Title </h1>
-				<p> Small Description </p>
-			</article>
+				<h1>Filesharing</h1>
+				<p>User files are stored privately, they can be shared by emailing a link.
+				</p>
+			</section>
 		</aside>
+	
 	
 		{{>footer}}
 </body>

@@ -123,19 +123,61 @@ iframe{
 *  About page css code
 *
 */
- #dtmember1 {
-   color: black;
- }
 
- #ddmember1 {
-   color: blue;
- }
+.aboutcontainer{
+  padding-top: 6%;
+}
+.AboutTeam{
+  width: 65%;
+  float: left;
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  grid-gap: 20px;
+  background-color: #fff;
+  color: #444;
 
- #AboutTeam {
-   float: left;
-   width: 60%;
-   text-align: left;
-   padding-left: 5%;
+}
+
+#teamnames{
+  text-align: center;
+}
+#teamdesc{
+  padding-left:8%;
+  font-size:medium ;
+  font: 100;
+}
+
+.box {
+  background-color: #426A5A;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+  text-align: left;
+}
+
+.AboutProject{
+background-color: #426A5A;
+margin-top: 15%;
+text-align: center;
+margin-right: 5%;
+padding-bottom: 3px;
+padding-top: 3px;
+}
+
+#ah2{
+  padding-left: 2%;
+}
+
+#ah3{
+  text-align: center;
+
+}
+ #memberimage{
+  padding-left: 20%;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
 
  }
 
@@ -143,14 +185,7 @@ iframe{
  .greyContainer > #registerButton{
    margin-bottom: 20px !important;
  }
-
- #AboutProject {
-   float: right;
-   width: 30%;
-   text-align: center;
-
-
- }
+ 
 
  /*
 *
