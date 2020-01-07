@@ -34,10 +34,10 @@ Team Members
 **Team members**
 
 
-| [Alfonzo](https://github.coventry.ac.uk/alfonzoj/)                           | [Eduardo](https://github.coventry.ac.uk/cruzfrae)                                        | [Guilherme](https://github.coventry.ac.uk/deoliveg)         | [Hassan](https://github.coventry.ac.uk/sultanh5)       | [Josh](https://github.coventry.ac.uk/handley7)         | [Preeth](https://github.coventry.ac.uk/selvamop)          | [Sofia](https://github.coventry.ac.uk/valente3)          |               
+| [Guilherme](https://github.coventry.ac.uk/deoliveg)         | [Hassan](https://github.coventry.ac.uk/sultanh5)       | [Josh](https://github.coventry.ac.uk/handley7)         | [Preeth](https://github.coventry.ac.uk/selvamop)          | [Sofia](https://github.coventry.ac.uk/valente3)          |               
 | :---:                                           |     :---:                                    |     :---:      |         :---: |         :---: |    :---:      |:---:      |
 |                                                 |                                              |                |               |               |               |                |
-| <img src="authors/alfonzo.jpg" width="100">| <img src="authors/eduardo.jpg" width="100"> |<img src="authors/gui.jpg" width="100">                | <img src="authors/hassan.jpg" width="100">   | <img src="authors/josh.jpg" width="100"> | <img src="authors/preeth.jpg" width="100">             | <img src="authors/sofia.jpg" width="100">
+|<img src="authors/gui.jpg" width="100">                | <img src="authors/hassan.jpg" width="100">   | <img src="authors/josh.jpg" width="100"> | <img src="authors/preeth.jpg" width="100">             | <img src="authors/sofia.jpg" width="100">
 
 ______________________________________________________________________________________________________________________________
 
