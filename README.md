@@ -10,6 +10,9 @@ Team Members
 **Dependencies**
  -  Koa
  - nodeJS
+ - Cucumber
+ - Jest
+ - ESLint
 
 
 ***: Basic features**
@@ -53,12 +56,13 @@ Tutorial on how to work with git branches:
 ______________________________________________________________________________________________________________________________
 
 *Running*
-
+- `npm run start`
 ______________________________________________________________________________________________________________________________
 
 *Debugging*
 
 Debugging can be made with VS Code by pressing `f5` or with `nmp run watch`
+
 ______________________________________________________________________________________________________________________________
 
 *Folder Structure*
